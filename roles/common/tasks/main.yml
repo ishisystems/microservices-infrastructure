@@ -58,6 +58,10 @@
     name: epel-release
     state: latest
 
+- name: enable EPEL repo permanently
+  sudo: yes
+  command: yum-config-manager --enable epel
+
 - name: install pip
   sudo: yes
   yum:
@@ -82,4 +86,4 @@
     - distributive
 
 - include: users.yml
-- include: ssl.yml
+#- include: ssl.yml

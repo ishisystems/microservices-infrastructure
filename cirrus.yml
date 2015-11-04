@@ -32,7 +32,7 @@
     consul_servers_group: role=control
   roles:
     - common
-#    - collectd
+    - collectd
 #    - logrotate
 #    - consul-template
 #    - docker

@@ -6,7 +6,7 @@ cir-node5 ansible_ssh_host=172.21.82.75 ansible_ssh_port=2022
 cir-node6 ansible_ssh_host=172.21.82.76 ansible_ssh_port=2022
 cir-node7 ansible_ssh_host=172.21.82.77 ansible_ssh_port=2022
 
-[control]
+[role=control]
 cir-node2
 cir-node4
 cir-node6

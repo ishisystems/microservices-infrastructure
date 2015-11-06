@@ -33,7 +33,7 @@
   roles:
     - common
     - collectd
-#    - logrotate
+    - logrotate
 #    - consul-template
 #    - docker
 #    - logstash

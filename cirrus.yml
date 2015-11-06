@@ -34,7 +34,7 @@
     - common
     - collectd
     - logrotate
-#    - consul-template
+    - consul-template
 #    - docker
 #    - logstash
 #    - nginx

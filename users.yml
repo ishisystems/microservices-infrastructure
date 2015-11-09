@@ -3,3 +3,7 @@ users:
      enabled: 1
      pubkeys:
        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCu/9CrBQy12vgy3WTs+EYfostK9sDxL9sZwTQOTwrSzPMAINYpQN+oG3Gak9NMdMkK+OEE0oQxk/JiUOvCRAT2tYQUbseEMAti/eHKZfWIApwJXxMEphgDtc43WoUVXsVSziiNq7wMHOA81fDq5vusILy3yVqT8Srw1eMsLXv92/lHWFgqfG1DVbUIlFnnMyik68V6PvyJRrFfjJz/XR3fhZ7pjTqAtu0XTmRp3AAYCAPrC0ryDxxC7HKzp2XmJ1WCzMe2EFipRMxBirYjq7w20kp1N+Y3clYzVtMcOUGLg+v5a7KkRWA+09cwuygDD7Efcmud69sfWXVaB488hHqL cirrus@ishisystems.com
+   - name: ankur.shah
+     enabled: 1
+     pubkeys:
+       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKWuq0DP/I2wHOeorl9o5XQzYD2Atd7X758/uQVqJMjQM7wkhYNrg4W5V9hpkJevnsXpxF0Sj8n0sZerlJTw/wg0fuRZ8J4e+EaBatEO+Dj4tHJPep5EdeQ40yJWL+MPGCmXjbMPcflvOrhZqEIYeMzn2shvqNDqNK1e1ihfl7Up6ufTRqPVMBUWLwIm4lnbpjoTYIrLy0wbQ+pyjM/w1fLMziJlehvu64hgpXjWHK1OlIEVj/6/2nUhF4pVYJt2fGHCEj1FKDmaYfT1yL+NPGsU5XGcYJh1ow+vopGHL/8WTQC5c1ldPvOj00hehfYHHCCkD3bWXgntIWyp5SZ/Xf ankur.shah@geek2nerd.local

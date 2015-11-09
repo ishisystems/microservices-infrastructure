@@ -62,20 +62,47 @@
   sudo: yes
   command: yum-config-manager --enable epel
 
-- name: install pip
+- name: Install build essentials
+  yum: name="@Development tools"
+  sudo: yes
+
+- name: Install Python development package
+  yum: name=python-devel
+  sudo: yes
+
+- name: Install OpenSSL development package
+  yum: name=openssl-devel
+  sudo: yes
+
+- name: install pip and other dependencies
   sudo: yes
   yum:
-    name: python-pip
+    name: "{{ item.name }}"
     state: latest
+  with_items:
+    - name: python-pip
+    - name: libffi-devel
 
 - name: update setuptools and pip
   sudo: yes
   pip:
     name: "{{ item.name }}"
     state: latest
+    extra_args: '--proxy https://tel-proxy.yaanatech.net:3128'
   with_items:
     - name: pip
     - name: setuptools
+
+- name: install PyOpenSSL
+  sudo: yes
+  pip:
+    name: "{{ item.name }}"
+    state: latest
+    extra_args: '--proxy https://tel-proxy.yaanatech.net:3128'
+  with_items:
+    - name: pyopenssl 
+    - name: ndg-httpsclient 
+    - name: pyasn1
 
 - name: install distributive
   sudo: yes

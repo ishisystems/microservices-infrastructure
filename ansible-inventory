@@ -1,10 +1,10 @@
-cir-node1 ansible_ssh_host=172.21.82.71 ansible_ssh_port=2022
-cir-node2 ansible_ssh_host=172.21.82.72 ansible_ssh_port=2022
-cir-node3 ansible_ssh_host=172.21.82.73 ansible_ssh_port=2022
-cir-node4 ansible_ssh_host=172.21.82.74 ansible_ssh_port=2022
-cir-node5 ansible_ssh_host=172.21.82.75 ansible_ssh_port=2022
-cir-node6 ansible_ssh_host=172.21.82.76 ansible_ssh_port=2022
-cir-node7 ansible_ssh_host=172.21.82.77 ansible_ssh_port=2022
+cir-node1 ansible_ssh_host=172.21.82.71 ansible_ssh_port=2022 private_ipv4=172.21.82.71
+cir-node2 ansible_ssh_host=172.21.82.72 ansible_ssh_port=2022 private_ipv4=172.21.82.72
+cir-node3 ansible_ssh_host=172.21.82.73 ansible_ssh_port=2022 private_ipv4=172.21.82.73
+cir-node4 ansible_ssh_host=172.21.82.74 ansible_ssh_port=2022 private_ipv4=172.21.82.74
+cir-node5 ansible_ssh_host=172.21.82.75 ansible_ssh_port=2022 private_ipv4=172.21.82.75
+cir-node6 ansible_ssh_host=172.21.82.76 ansible_ssh_port=2022 private_ipv4=172.21.82.76
+cir-node7 ansible_ssh_host=172.21.82.77 ansible_ssh_port=2022 private_ipv4=172.21.82.77
 
 [role=control]
 cir-node2

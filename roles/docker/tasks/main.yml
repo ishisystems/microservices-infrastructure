@@ -24,8 +24,8 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - docker-engine-1.7.0
-    - docker-selinux
+    - docker-1.7.1
+    - docker-selinux-1.7.1
   tags:
     - docker
     - bootstrap
@@ -67,6 +67,19 @@
   tags:
     - docker
 
+- name: add docker-local options to existing docker config
+  sudo: yes
+  lineinfile:
+    dest: /usr/lib/systemd/system/docker.service
+    regexp: ^ExecStart=/usr/bin/docker 
+    line: ExecStart=/usr/bin/docker -d $OPTIONS $other_arg \\
+    state: present
+    create: yes
+  notify:
+    - reload docker
+  tags:
+    - docker
+
 - name: create docker.system.d
   sudo: yes
   file:
@@ -82,8 +95,6 @@
     content: |
       [Service]
       EnvironmentFile=-/etc/sysconfig/docker-local
-      ExecStart=
-      ExecStart=/usr/bin/docker -d -H fd:// $other_arg
   notify:
     - reload docker
   tags:

@@ -53,17 +53,38 @@
     - docker
     - bootstrap
 
+- name: setup env specific docker options
+  sudo: yes
+  template:
+    src: docker-local.j2
+    dest: /etc/sysconfig/docker-local
+    mode: 0644
+  notify:
+    - reload docker
+  tags:
+    - docker
 
-- name: configure docker consul dns
+- name: setup docker drop in config file
+  sudo: yes
+  template:
+    src: docker.j2
+    dest: /etc/sysconfig/docker
+    mode: 0644
+  notify:
+    - reload docker
+  tags:
+    - docker
+
+- name: ensure docker-storage is using devicemapper and lvm
   sudo: yes
   lineinfile:
-    dest: /etc/sysconfig/docker-local
-    regexp: ^other_arg=
-    line: other_arg='--dns {{ private_ipv4 }} --dns-search service.{{ consul_dns_domain }} --log-driver=syslog'
+    dest: /etc/sysconfig/docker-storage
+    regexp: ^DOCKER_STORAGE_OPTIONS=
+    line: DOCKER_STORAGE_OPTIONS=--storage-driver devicemapper --storage-opt dm.fs=xfs --storage-opt dm.thinpooldev=/dev/mapper/pri-docker--pool --storage-opt dm.use_deferred_removal=true
     state: present
     create: yes
   notify:
-    - restart docker
+    - reload docker
   tags:
     - docker
 

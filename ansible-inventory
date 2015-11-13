@@ -1,3 +1,4 @@
+[dc=teldata]
 cir-node1 ansible_ssh_host=172.21.82.71 ansible_ssh_port=2022 private_ipv4=172.21.82.71
 cir-node2 ansible_ssh_host=172.21.82.72 ansible_ssh_port=2022 private_ipv4=172.21.82.72
 cir-node3 ansible_ssh_host=172.21.82.73 ansible_ssh_port=2022 private_ipv4=172.21.82.73

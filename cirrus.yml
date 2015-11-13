@@ -36,10 +36,10 @@
     - logrotate
     - consul-template
     - docker
-#    - logstash
-#    - nginx
-#    - consul
-#    - dnsmasq
+    - logstash
+    - nginx
+    - consul
+    - dnsmasq
 #
 ## ROLES - after provisioning the software that's common to all hosts, we do
 ## specialized hosts. This configuration has two major groups: control nodes and

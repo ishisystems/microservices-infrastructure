@@ -51,43 +51,43 @@
 ## The worker role itself has a minimal configuration, as it's designed mainly to
 ## run software that the Mesos leader shedules. It also forwards traffic to
 ## globally known ports configured through Marathon.
-#- hosts: role=worker
+- hosts: role=worker
 #  # role=worker hosts are a subset of "all". Since we already gathered facts on
 #  # all servers, we can skip it here to speed up the deployment.
-#  gather_facts: no
-#  vars:
-#    consul_dns_domain: consul
-#    mesos_mode: follower
+  gather_facts: no
+  vars:
+    consul_dns_domain: consul
+    mesos_mode: follower
 #
 #    # Set this to whatever domain you want to reach haproxy from; it should be
 #    # in this format: [short-name]-lb.[domain], where [short-name] and [domain]
 #    # are the same as configured in terraform.
 #    # In this example, short-name is "mi" and domain is "example.com":
-#    haproxy_domain: mi-lb.example.com
-#  roles:
-#    - mesos
-#    - haproxy
+    haproxy_domain: tel-lb.yaanatech.com
+  roles:
+    - mesos
+    - haproxy
 #
 ## the control nodes are necessarily more complex than the worker nodes, and have
 ## ZooKeeper, Mesos, and Marathon leaders. In addition, they control Vault to
 ## manage secrets in the cluster. These servers do not run applications by
 ## themselves, they only schedule work. That said, there should be at least 3 of
 ## them (and always an odd number) so that ZooKeeper can get and keep a quorum.
-#- hosts: role=control
-#  gather_facts: no
-#  vars:
-#    consul_dns_domain: consul
-#    consul_servers_group: role=control
-#    mesos_leaders_group: role=control
-#    mesos_mode: leader
-#    zookeeper_server_group: role=control
-#  roles:
-#    - vault
-#    - zookeeper
-#    - mesos
-#    - marathon
-#    - chronos
-#    - mantlui
+- hosts: role=control
+  gather_facts: no
+  vars:
+    consul_dns_domain: consul
+    consul_servers_group: role=control
+    mesos_leaders_group: role=control
+    mesos_mode: leader
+    zookeeper_server_group: role=control
+  roles:
+    - vault
+    - zookeeper
+    - mesos
+    - marathon
+    - chronos
+    - mantlui
 #
 ## GlusterFS has to be provisioned in reverse order from Mesos: servers then
 ## clients.

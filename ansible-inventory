@@ -11,3 +11,8 @@ cir-node7 ansible_ssh_host=172.21.82.77 ansible_ssh_port=2022 private_ipv4=172.2
 cir-node2
 cir-node4
 cir-node6
+
+[role=worker]
+cir-node1
+cir-node5
+cir-node7

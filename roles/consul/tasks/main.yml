@@ -33,6 +33,7 @@
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     mode: "{{ item.mode | default('u=rw,g=r,o=r') }}"
+    force: "yes"
   with_items:
     - src: consul.json.j2
       dest: /etc/consul/consul.json

@@ -16,3 +16,6 @@ cir-node6
 cir-node1 consul_is_server=False
 cir-node5 consul_is_server=False
 cir-node7 consul_is_server=False
+
+[role=elasticsearch]
+cir-node3

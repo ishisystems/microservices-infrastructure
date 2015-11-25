@@ -6,4 +6,4 @@ users:
    - name: ankur.shah
      enabled: 1
      pubkeys:
-       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKWuq0DP/I2wHOeorl9o5XQzYD2Atd7X758/uQVqJMjQM7wkhYNrg4W5V9hpkJevnsXpxF0Sj8n0sZerlJTw/wg0fuRZ8J4e+EaBatEO+Dj4tHJPep5EdeQ40yJWL+MPGCmXjbMPcflvOrhZqEIYeMzn2shvqNDqNK1e1ihfl7Up6ufTRqPVMBUWLwIm4lnbpjoTYIrLy0wbQ+pyjM/w1fLMziJlehvu64hgpXjWHK1OlIEVj/6/2nUhF4pVYJt2fGHCEj1FKDmaYfT1yL+NPGsU5XGcYJh1ow+vopGHL/8WTQC5c1ldPvOj00hehfYHHCCkD3bWXgntIWyp5SZ/Xf ankur.shah@geek2nerd.local
+       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDwU7RfxtKEMD4O74FuP/fMNiTmWo+vGMx6NiMzBYh8BXUoJTHua6stB9uhlR2oV5t598SE++6klw8e0LNMXtqu8UebX/r7U+vH4U8z4m6Zth9Qlovl8cIRNQOEJv7ES9N8iiBux1hKI1onyTxHcW8uwnbPh5sFAh2a2IvrhEX9h9TCDckAN2v18VVqw6Uk+wrrtKbjoXbpT3bOIN/YWRzzuV3TSrFraECoWpB/rrnHdpqd8mkhD8URlqKzgZtPLn88TjwCHw50iWvndN/7M7DBPIwrMN/TyribtfxRAf62eRB5f2gYZj16vvPzSncymwziUEbQekgduyztwyOyy2NL ankur.shah@aps2ankur

@@ -8,5 +8,6 @@
         notifempty
         minsize 1
         olddir archive
+        copytruncate
 }
 

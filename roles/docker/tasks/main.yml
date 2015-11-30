@@ -93,7 +93,7 @@
   lineinfile:
     dest: /usr/lib/systemd/system/docker.service
     regexp: ^ExecStart=/usr/bin/docker 
-    line: ExecStart=/usr/bin/docker -d $OPTIONS $other_arg \\
+    line: ExecStart=/usr/bin/docker daemon $OPTIONS $other_arg \\
     state: present
     create: yes
   notify:

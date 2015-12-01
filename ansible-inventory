@@ -28,3 +28,6 @@ cir-node7 consul_is_server=False
 
 [role=elasticsearch]
 cir-node3
+
+[role=redis]
+cir-node3

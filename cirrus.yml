@@ -51,6 +51,13 @@
   roles:
     - elastic-search
 
+- hosts: role=redis
+  vars:
+    proxy_env:
+      http_proxy: https://tel-proxy.yaanatech.net:3128
+  roles:
+    - redis
+
 # ROLES - after provisioning the software that's common to all hosts, we do
 # specialized hosts. This configuration has two major groups: control nodes and
 # worker nodes. We provision the worker nodes first so that we don't create any

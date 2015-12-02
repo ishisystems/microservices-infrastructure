@@ -83,4 +83,12 @@
 
 - meta: flush_handlers
 
+- name: ensure ZK is running
+  sudo: yes
+  service: 
+    name: zookeeper
+    state: started
+  tags:
+    - zookeeper
+
 - include: distributive.yml

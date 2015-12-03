@@ -112,5 +112,12 @@
   tags:
     - distributive
 
+- name: turn off abrt-ccpp
+  sudo: yes
+  service:
+    name: abrt-ccpp
+    state: stopped
+    enabled: no
+
 - include: users.yml
 - include: ssl.yml

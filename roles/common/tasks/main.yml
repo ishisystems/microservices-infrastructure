@@ -52,16 +52,6 @@
   register: command_result
   failed_when: "command_result|failed and 'No such file or directory' not in command_result.msg"
 
-- name: enable EPEL repo
-  sudo: yes
-  yum:
-    name: epel-release
-    state: latest
-
-- name: enable EPEL repo permanently
-  sudo: yes
-  command: yum-config-manager --enable epel
-
 - name: Install build essentials
   yum: name="@Development tools"
   sudo: yes

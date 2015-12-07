@@ -1,1 +1,3 @@
 docker_proxy: tel-proxy.yaanatech.net:3128
+docker_registry_fqdn: cirrus-node3.dev.yaanatech.net
+docker_no_proxy_domains: .dev.yaanatech.net

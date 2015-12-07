@@ -9,15 +9,6 @@
     - docker
     - bootstrap
 
-- name: install docker repo
-  sudo: yes
-  copy:
-    src: docker.repo
-    dest: /etc/yum.repos.d/docker.repo
-  tags:
-    - docker
-    - bootstrap
-
 - name: install docker packages
   sudo: yes
   yum:
@@ -157,4 +148,5 @@
     - docker
     - bootstrap # needed to install Docker images during bootstrap
 
+- include: docker-registry-client.yml
 - include: collectd.yml

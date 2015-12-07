@@ -1,0 +1,88 @@
+---
+# tasks file for docker-registry
+
+# These lines are kept here for future reference, in case installing registry on a new node fails, 
+# some of them might be needed
+#
+# yum -y localinstall http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+# systemctl stop firewalld
+# systemctl disable firewalld
+# setenforce 0 or disble selinux in the config file
+# yum install -y java
+
+
+# openssl req -newkey rsa:4096 -nodes -sha256 -keyout /certs/domain.key -x509 -days 365 -out /certs/domain.crt
+
+- name: create folder for docker registry data
+  sudo: yes
+  file:
+    name: /home/docker-registry
+    state: directory
+    mode: 0755
+  tags:
+    - docker-registry
+
+- name: ensure docker-registry docker image is present
+  sudo: yes
+  command: docker pull {{ docker_registry_image }}:{{ docker_registry_image_tag }}
+  notify: restart docker-registry container
+  tags:
+    - docker-registry
+
+- name: copy cert file to mount directory
+  sudo: yes
+  copy:
+    dest: /certs/domain.crt
+    mode: 0400
+    src: ssl/docker-registry.crt
+    backup: yes
+  notify: restart docker-registry container
+  tags:
+    - docker-registry
+
+- name: copy key file to mount directory
+  sudo: yes
+  copy:
+    dest: /certs/domain.key
+    mode: 0400
+    src: ssl/docker-registry.key
+    backup: yes
+  notify: restart docker-registry container
+  tags:
+    - docker-registry
+
+- name: copy config file
+  sudo: yes
+  copy:
+    dest: /docker-registry-config.yml
+    mode: 0400
+    src: config.yml
+    backup: yes
+  notify: restart docker-registry container
+  tags:
+    - docker-registry
+
+- name: run registry as docker container
+  sudo: yes
+  docker:
+    detach: yes
+    docker_api_version: '1.20'
+    env:
+      REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
+      REGISTRY_HTTP_TLS_KEY: /certs/domain.key
+    image: "{{ docker_registry_image }}:{{ docker_registry_image_tag }}"
+    name: "{{ docker_registry_container_name }}"
+    expose:
+      - 5001
+    ports:
+      - 5000:5000
+      - 5001:5001
+    restart_policy: always
+    state: started
+    volumes:
+      - /certs:/certs:ro
+      - /home/docker-registry:/var/lib/registry
+      - /docker-registry-config.yml:/etc/docker/registry/config.yml:ro
+  tags:
+    - docker-registry
+

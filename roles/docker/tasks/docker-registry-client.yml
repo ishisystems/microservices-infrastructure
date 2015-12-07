@@ -1,0 +1,27 @@
+- name: create folder for certificate
+  sudo: yes
+  file:
+    name: /etc/docker/certs.d/{{ docker_registry_fqdn }}:{{ docker_registry_hostport }}
+    state: directory
+    mode: 0755
+  tags:
+    - docker-registry-client
+
+- name: copy cert file to docker certs
+  sudo: yes
+  copy:
+    dest: /etc/docker/certs.d/{{ docker_registry_fqdn }}:{{ docker_registry_hostport }}/ca.crt
+    mode: 0400
+    src: ssl/docker-registry.crt
+    backup: yes
+  tags:
+    - docker-registry-client
+
+- name: copy registry cert file
+  sudo: yes
+  copy:
+    dest: /etc/pki/ca-trust/source/anchors/cirrus-node3.crt
+    src: ssl/docker-registry.crt
+  notify: update-ca-trust
+  tags:
+    - docker-registry-client

@@ -1,0 +1,6 @@
+---
+# vars file for docker-registry
+docker_registry_hostport: 5000
+docker_registry_image: registry
+docker_registry_image_tag: 2
+docker_registry_container_name: registry

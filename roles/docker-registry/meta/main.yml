@@ -1,0 +1,8 @@
+---
+galaxy_info:
+  author: Andras Kerekes
+  description: 
+  company: Ishi Systems Inc.
+  min_ansible_version: 1.8
+dependencies: []
+  

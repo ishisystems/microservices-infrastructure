@@ -1,0 +1,3 @@
+---
+# vars file for docker-registry
+docker_registry_hostport: 5000

@@ -65,6 +65,10 @@
   roles:
     - docker-registry
 
+- hosts: role=kibana
+  roles:
+    - kibana
+
 # ROLES - after provisioning the software that's common to all hosts, we do
 # specialized hosts. This configuration has two major groups: control nodes and
 # worker nodes. We provision the worker nodes first so that we don't create any

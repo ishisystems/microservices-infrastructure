@@ -34,3 +34,6 @@ cir-node3
 
 [role=docker-registry]
 cir-node3
+
+[role=kibana]
+cir-node3

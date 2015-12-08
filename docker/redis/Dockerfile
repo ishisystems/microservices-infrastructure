@@ -3,8 +3,6 @@ FROM centos:7
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN groupadd -r redis && useradd -r -g redis redis
 
-RUN yum install -y ca-certificates curl
-
 # grab gosu for easy step-down from root
 RUN gpg --keyserver pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
 RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/1.2/gosu-amd64" \
@@ -18,7 +16,7 @@ ENV REDIS_DOWNLOAD_URL http://download.redis.io/releases/redis-3.0.5.tar.gz
 ENV REDIS_DOWNLOAD_SHA1 ad3ee178c42bfcfd310c72bbddffbbe35db9b4a6
 
 # for redis-sentinel see: http://redis.io/topics/sentinel
-RUN buildDeps='gcc libc6-dev make' \
+RUN buildDeps='gcc glibc-devel make' \
 	&& set -x \
 	&& yum install -y $buildDeps \
 	&& rm -rf /var/lib/apt/lists/* \
@@ -36,8 +34,8 @@ RUN mkdir /data && chown redis:redis /data
 VOLUME /data
 WORKDIR /data
 
-COPY docker-entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+COPY docker/redis/docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 6379
 CMD [ "redis-server" ]

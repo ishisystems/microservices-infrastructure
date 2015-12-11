@@ -1,6 +1,9 @@
 ---
-cluster: cirruscluster
-node: cirrusnode
-num_replicas: 1
-num_shards: 5
-index_name: cirrusmaster
+docker_registry_fqdn: localhost
+docker_registry_port: 5000
+elastic_search_container_name: elastic-search
+cluster.name: "cirrus-dev"
+node.name: "cirrus-es"
+index.number_of_shards: 5
+index.number_of_replicas: 1
+network.host: 0.0.0.0

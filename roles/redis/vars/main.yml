@@ -1,2 +1,5 @@
 ---
 # vars file for ansible-redis
+docker_registry_fqdn: localhost
+docker_registry_port: 5000
+redis_container_name: redis

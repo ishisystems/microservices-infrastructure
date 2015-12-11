@@ -16,14 +16,7 @@ RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/dow
 RUN curl -fL https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-2.1.0.tar.gz | tar xzf - -C /opt && \
 mv /opt/elasticsearch-2.1.0 /opt/elasticsearch
 
-# elasticsearch-curator
-RUN yum install -y python-setuptools && \
-easy_install pip && \
-pip install elasticsearch-curator
-
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/elasticsearch/bin:/opt/elasticsearch/data:/opt/elasticsearch/config
-
-COPY docker/elasticsearch/config /opt/elasticsearch/config
 
 COPY docker/elasticsearch/docker-entrypoint.sh /
 

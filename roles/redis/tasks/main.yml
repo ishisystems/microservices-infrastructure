@@ -1,7 +1,19 @@
 ---
-# tasks file for ansible-redis
-- include: debian.yml
-  when: ansible_os_family == "Debian"
+# tasks file for redis
 
-- include: centos.yml
-  when: ansible_os_family == "RedHat"
+- name: run the container
+  sudo: yes
+  docker:
+    detach: yes
+    docker_api_version: '1.20'
+    image: "{{ docker_registry_fqdn }}:{{ docker_registry_port }}/redis:v0.1"
+    name: "{{ redis_container_name }}"
+    ports:
+      - 6379:6379
+    restart_policy: always
+    state: started
+    volumes:
+      - "/var/redis/data" : "/data"
+      - "/var/redis/data" : "/data"
+  tags:
+    - redis

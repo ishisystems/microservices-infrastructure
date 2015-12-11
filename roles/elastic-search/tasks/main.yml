@@ -1,51 +1,41 @@
 ---
-- name: Install PIP
-  yum: pkg=python-pip state=installed update_cache=true
-  tags:
-    - elastic-search
+# tasks file for elastic-search
 
-- name: Install Python HTTPLib
-  sudo: true
-  pip:
-    name: httplib2
-    state: present
-    extra_args: '--proxy https://tel-proxy.yaanatech.net:3128'
-  tags:
-    - elastic-search
-
-- name: Add Elasticsearch repository.
-  sudo: true
+- name: copy config file
+  sudo: yes
   copy:
-    src: elasticsearch.repo
-    dest: /etc/yum.repos.d/elasticsearch.repo
+    dest: /opt/elasticsearch/config
     mode: 0644
+    src: logging.yml
+    backup: yes
+  notify: restart elastic-search container
   tags:
-      - elastic-search
-
-- name: Install Elasticsearch
-  sudo: true
-  yum: pkg=elasticsearch state=installed update_cache=yes
-  tags:
-      - elastic-search
-
-# Run sudo update-rc.d elasticsearch defaults 95 10
-- name: Enable Elasticsearch (Start on boot)
-  sudo: true
-  service:
-    name: elasticsearch
-    enabled: yes
-  notify:
-   - Start Elasticsearch
-  tags:
-     - elastic-search
-
-- name: Configure Elasticsearch
-  sudo: true
-  template: 
-    src: elasticsearch.yml.j2 
-    dest: /etc/elasticsearch/elasticsearch.yml
-  tags:
-    - configs
     - elastic-search
-  notify:
-   - Restart Elasticsearch
+
+- name: setup docker drop in config file
+  sudo: yes
+  template:
+    src: elasticsearch.yml.j2
+    dest: /opt/elasticsearch/config
+    mode: 0644
+    backup: yes
+  notify: restart elastic-search container
+    tags:
+      - elastic-search
+
+- name: run the container
+  sudo: yes
+  docker:
+    detach: yes
+    docker_api_version: '1.20'
+    image: "{{ docker_registry_fqdn }}:{{ docker_registry_port }}/elastic-search:v0.1"
+    name: "{{ elastic_search_container_name }}"
+    ports:
+      - 9200:9200
+      - 9300:9300
+    restart_policy: always
+    state: started
+    volumes:
+      - "/var/elasticsearch/config" : "/opt/elasticsearch/config"
+  tags:
+    - elastic-search

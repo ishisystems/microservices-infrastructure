@@ -1,6 +1,6 @@
 ---
-- name: Start Elasticsearch
-  service: name=elasticsearch state=start
+# handlers file for elastic-search
 
-- name: Restart Elasticsearch
-  service: name=elasticsearch state=restarted
+- name: restart elastic-search container
+  command: docker restart {{ elastic_search_container_name }}
+  sudo: yes

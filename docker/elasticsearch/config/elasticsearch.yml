@@ -1,5 +1,0 @@
-cluster.name: "cirrus-dev"
-node.name: "cirrus-es"
-index.number_of_shards: 5
-index.number_of_replicas: 1
-network.host: 0.0.0.0

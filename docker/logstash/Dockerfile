@@ -1,4 +1,4 @@
-FROM centos:7
+FROM cirrus-node3.dev.yaanatech.net:5000/centos7.1-nonet-20151201
 
 RUN yum install -y java-1.8.0-openjdk-headless tar
 

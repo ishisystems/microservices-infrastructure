@@ -16,8 +16,7 @@ RUN groupadd -r logstash && useradd -r -d /opt/logstash -g logstash logstash
 # Install requirements and Logstash
 RUN yum install -y \
       curl \
-      python \
-      py-pip \
+      which \
       bash &&\
     mkdir -p \
       ${LS_CFG_SSL_DIR} \

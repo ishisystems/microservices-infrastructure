@@ -13,7 +13,7 @@
   copy:
     src: zookeeper-wait-for-listen.sh
     dest: /usr/local/bin
-    mode: u=rwx,g=rx,o=rx
+    mode: 0755
   tags:
     - zookeeper
 

@@ -1,7 +1,5 @@
 ---
 # vars file for kibana
 
-docker_registry_fqdn: localhost
-docker_registry_port: 5000
 elasticsearch_url: http://localhost:9200
 kibana_container_name: kibana

@@ -71,7 +71,7 @@
   copy:
     src: mesos-master.py
     dest: /usr/share/collectd/plugins
-    mode: u=r
+    mode: 0400
   tags:
     - mesos
     - collectd

@@ -1,0 +1,36 @@
+---
+# some created directories may be redundant, but are kept in case anything else
+# changes, and to enable the picking and choosing of components/roles.
+- name: create consul configuration directory
+  sudo: yes
+  file:
+    path: /etc/consul
+    state: directory
+    mode: 0770
+  tags:
+    - consul
+    - distributive
+    - elastic-search
+
+- name: create symlink to distributive elasticsearch checklist
+  sudo: yes
+  file:
+    state: link
+    src: /usr/share/distributive/elasticsearch.json
+    dest: /etc/distributive.d/elasticsearch.json
+  tags:
+    - consul
+    - distributive
+    - elastic-search
+
+- name: register distributive tests with consul
+  sudo: yes
+  copy:
+    src: distributive-elasticsearch-check.json
+    dest: /etc/consul/
+  notify:
+    - reload consul
+  tags:
+    - consul
+    - distributive
+    - elastic-search

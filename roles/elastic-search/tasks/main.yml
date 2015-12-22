@@ -1,34 +1,65 @@
 ---
 # tasks file for elastic-search
 
+- name: create folder for elastic search data
+  sudo: yes
+  file:
+    name: /home/{{ item }}
+    state: directory
+    mode: 0755
+    owner: elasticsearch
+    recurse: yes
+  with_items:
+    - elasticsearch
+    - elasticsearch/config
+  tags:
+    - elastic-search
+
 - name: copy config file
   sudo: yes
   copy:
-    dest: /opt/elasticsearch/config
+    dest: /home/elasticsearch/config/logging.yml
     mode: 0644
     src: logging.yml
-    backup: yes
   notify: restart elastic-search container
   tags:
     - elastic-search
+
+- name: copy elasticsearch.json file
+  sudo: yes
+  copy:
+    dest: /usr/share/distributive/elasticsearch.json
+    src: elasticsearch.json
+  tags:
+    - elastic-search
+    - consul
 
 - name: setup docker drop in config file
   sudo: yes
   template:
     src: elasticsearch.yml.j2
-    dest: /opt/elasticsearch/config
+    dest: /home/elasticsearch/config/elasticsearch.yml
     mode: 0644
-    backup: yes
   notify: restart elastic-search container
-    tags:
-      - elastic-search
+  tags:
+    - elastic-search
+
+- name: ensure docker-elasticsearch docker image is present
+  sudo: yes
+  command: docker pull {{ docker_registry_fqdn }}:{{ docker_registry_port }}/{{ docker_elasticsearch_image }}:{{ docker_elasticsearch_image_tag }}
+#  notify: restart elastic-search container
+  tags:
+    - elastic-search
 
 - name: run the container
   sudo: yes
   docker:
     detach: yes
     docker_api_version: '1.20'
-    image: "{{ docker_registry_fqdn }}:{{ docker_registry_port }}/elastic-search:v0.1"
+    #env:
+    #  REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
+    #  REGISTRY_HTTP_TLS_KEY: /certs/domain.key
+    image: "{{ docker_registry_fqdn }}:{{ docker_registry_port }}/{{ docker_registry_image }}:{{ docker_registry_image_tag }}"
     name: "{{ elastic_search_container_name }}"
     ports:
       - 9200:9200
@@ -36,6 +67,9 @@
     restart_policy: always
     state: started
     volumes:
-      - "/var/elasticsearch/config" : "/opt/elasticsearch/config"
+      - /home/elasticsearch/config:/opt/elasticsearch/config
+      - /usr/share/distributive:/usr/share/distributive
   tags:
     - elastic-search
+
+- include: distributive.yml

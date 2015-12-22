@@ -1,0 +1,55 @@
+{
+  "Name": "elasticsearch health check",
+  "Notes": "For use with Microservice Infrastructure",
+  "Checklist": [
+    {
+      "Name": "elasticsearch configuration directory",
+      "ID": "directory",
+      "Parameters": [
+        "/opt/elasticsearch/"
+      ]
+    },
+    {
+      "Name": "elasticsearch configuration file",
+      "ID": "file",
+      "Parameters": [
+        "/opt/elasticsearch/elasticsearch.yml"
+      ]
+    },
+    {
+      "Name": "logstash systemd service file",
+      "ID": "file",
+      "Parameters": [
+        "/usr/lib/systemd/system/logstash.service"
+      ]
+    },
+    {
+      "Name": "rsyslog configuration file",
+      "ID": "file",
+      "Parameters": [
+        "/etc/rsyslog.conf"
+      ]
+    },
+    {
+      "Name": "logstashd statsd port",
+      "ID": "PortUDP",
+      "Parameters": [
+        "8125"
+      ]
+    },
+    {
+      "Name": "logstashd collectd port",
+      "ID": "PortUDP",
+      "Parameters": [
+        "25826"
+      ]
+    },
+    {
+      "Name": "logstashd syslog port",
+      "ID": "port",
+      "Parameters": [
+        "1514"
+      ]
+    }
+  ]
+}

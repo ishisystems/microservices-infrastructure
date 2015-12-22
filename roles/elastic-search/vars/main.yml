@@ -1,9 +1,13 @@
 ---
-docker_registry_fqdn: localhost
-docker_registry_port: 5000
-elastic_search_container_name: elastic-search
-cluster.name: "cirrus-dev"
-node.name: "cirrus-es"
-index.number_of_shards: 5
-index.number_of_replicas: 1
-network.host: 0.0.0.0
+elastic_search_container_name: elasticsearch
+docker_elasticsearch_image: elasticsearch
+docker_elasticsearch_image_tag: 0.1
+cluster:
+  name: "cirrus-dev"
+node:
+  name: "cirrus-es"
+index:
+  number_of_shards: 5
+  number_of_replicas: 1
+network:
+  host: 0.0.0.0

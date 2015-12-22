@@ -1,0 +1,10 @@
+{
+  "check": {
+    "id": "distributive-redis-checks",
+    "name": "Distributive redis Health Checks",
+    "script": "/bin/distributive -f /etc/distributive.d/redis.json -d '' --verbosity=info",
+    "status": "passing",
+    "interval": "1m",
+    "timeout": "30s"
+  }
+}

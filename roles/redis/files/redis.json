@@ -1,0 +1,34 @@
+{
+  "Name": "redis health check",
+  "Notes": "For use with Microservice Infrastructure",
+  "Checklist": [
+    {
+      "Name": "redis data directory",
+      "ID": "directory",
+      "Parameters": [
+        "/data"
+      ]
+    },
+    {
+      "Name": "redis server file",
+      "ID": "file",
+      "Parameters": [
+        "/usr/local/bin/redis-server"
+      ]
+    },
+    {
+      "Name": "redis cli file",
+      "ID": "file",
+      "Parameters": [
+        "/usr/local/bin/redis-cli"
+      ]
+    },
+    {
+      "Name": "redis communication port",
+      "ID": "port",
+      "Parameters": [
+        "6379"
+      ]
+    }
+  ]
+}

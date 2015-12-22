@@ -1,2 +1,10 @@
 ---
 # handlers file for ansible-redis
+
+- name: restart redis container
+  command: docker restart {{ redis_container_name }}
+  sudo: yes
+
+- name: reload consul
+  sudo: yes
+  command: "{{ consul_bin }} reload"

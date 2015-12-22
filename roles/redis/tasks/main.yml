@@ -14,6 +14,16 @@
   tags:
     - redis
 
+- name: copy redis.json file
+  sudo: yes
+  copy:
+    dest: /usr/share/distributive/redis.json
+    src: redis.json
+  notify: restart redis container
+  tags:
+    - redis
+    - consul
+
 - name: ensure docker-redis docker image is present
   sudo: yes
   command: docker pull {{ docker_registry_fqdn }}:{{ docker_registry_port }}/{{ docker_redis_image }}:{{ docker_redis_image_tag }}
@@ -36,3 +46,5 @@
       - /home/redis/data:/data
   tags:
     - redis
+
+- include: distributive.yml

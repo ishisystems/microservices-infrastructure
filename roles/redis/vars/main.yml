@@ -1,3 +1,5 @@
 ---
 # vars file for ansible-redis
 redis_container_name: redis
+docker_redis_image: redis
+docker_redis_image_tag: 0.1

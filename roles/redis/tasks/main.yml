@@ -1,19 +1,38 @@
 ---
 # tasks file for redis
+- name: create folder for redis data
+  sudo: yes
+  file:
+    name: /home/{{ item }}
+    state: directory
+    mode: 0755
+    owner: redis
+    recurse: yes
+  with_items:
+    - redis
+    - redis/data
+  tags:
+    - redis
+
+- name: ensure docker-redis docker image is present
+  sudo: yes
+  command: docker pull {{ docker_registry_fqdn }}:{{ docker_registry_port }}/{{ docker_redis_image }}:{{ docker_redis_image_tag }}
+#  notify: restart elastic-search container
+  tags:
+    - redis
 
 - name: run the container
   sudo: yes
   docker:
     detach: yes
     docker_api_version: '1.20'
-    image: "{{ docker_registry_fqdn }}:{{ docker_registry_port }}/redis:v0.1"
+    image: "{{ docker_registry_fqdn }}:{{ docker_registry_port }}/{{ docker_redis_image }}:{{ docker_redis_image_tag }}"
     name: "{{ redis_container_name }}"
     ports:
       - 6379:6379
     restart_policy: always
     state: started
     volumes:
-      - "/var/redis/data" : "/data"
-      - "/var/redis/data" : "/data"
+      - /home/redis/data:/data
   tags:
     - redis

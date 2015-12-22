@@ -12,6 +12,7 @@
   with_items:
     - elasticsearch
     - elasticsearch/config
+    - elasticsearch/data
   tags:
     - elastic-search
 
@@ -59,7 +60,7 @@
     #env:
     #  REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
     #  REGISTRY_HTTP_TLS_KEY: /certs/domain.key
-    image: "{{ docker_registry_fqdn }}:{{ docker_registry_port }}/{{ docker_registry_image }}:{{ docker_registry_image_tag }}"
+    image: "{{ docker_registry_fqdn }}:{{ docker_registry_port }}/{{ docker_elasticsearch_image }}:{{ docker_elasticsearch_image_tag }}"
     name: "{{ elastic_search_container_name }}"
     ports:
       - 9200:9200
@@ -68,6 +69,7 @@
     state: started
     volumes:
       - /home/elasticsearch/config:/opt/elasticsearch/config
+      - /home/elasticsearch/data:/opt/elasticsearch/data
       - /usr/share/distributive:/usr/share/distributive
   tags:
     - elastic-search

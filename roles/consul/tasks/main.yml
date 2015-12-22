@@ -4,6 +4,7 @@
   yum:
     name: consul
     state: present
+    disable_gpg_check: yes
   tags:
     - consul
     - bootstrap
@@ -13,6 +14,7 @@
   yum:
     name: consul-ui
     state: present
+    disable_gpg_check: yes
   when: consul_is_server
   tags:
     - consul
@@ -23,6 +25,7 @@
   yum:
     name: consul-utils
     state: present
+    disable_gpg_check: yes
   tags:
     - consul
     - bootstrap

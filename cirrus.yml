@@ -35,13 +35,13 @@
     - collectd
     - docker
     - logstash
+    - logrotate
+    - consul
 
 - hosts: role=mesos
   roles:
-    - logrotate
     - consul-template
     - nginx
-    - consul
     - dnsmasq
 
 # ROLES - after provisioning the software that's common to all hosts, we do

@@ -13,12 +13,15 @@ RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/dow
 	&& chmod +x /usr/local/bin/gosu
 
 # elasticsearch
-RUN curl -fL https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-2.1.0.tar.gz | tar xzf - -C /opt && \
-mv /opt/elasticsearch-2.1.0 /opt/elasticsearch
+RUN curl -fL https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-2.1.0.tar.gz | tar xzf - -C /opt \
+	&& mv /opt/elasticsearch-2.1.0 /opt/elasticsearch \
+	&& chown -R elasticsearch:elasticsearch /opt/elasticsearch
 
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/elasticsearch/bin:/opt/elasticsearch/data:/opt/elasticsearch/config
 
-COPY docker/elasticsearch/docker-entrypoint.sh /
+COPY docker/elasticsearch/docker-entrypoint.sh /docker-entrypoint.sh
+
+RUN chmod 0500 /docker-entrypoint.sh
 
 VOLUME /opt/elasticsearch/data
 

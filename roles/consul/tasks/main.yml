@@ -2,7 +2,7 @@
 - name: install consul
   sudo: yes
   yum:
-    name: consul
+    name: consul-0.5.2-4.el7.centos
     state: present
     disable_gpg_check: yes
   tags:

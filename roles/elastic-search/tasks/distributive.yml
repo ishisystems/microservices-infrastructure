@@ -18,6 +18,7 @@
     state: link
     src: /usr/share/distributive/elasticsearch.json
     dest: /etc/distributive.d/elasticsearch.json
+  notify: restart elastic-search container
   tags:
     - consul
     - distributive

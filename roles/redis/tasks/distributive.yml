@@ -12,12 +12,13 @@
     - distributive
     - redis
 
-- name: create symlink to distributive elasticsearch checklist
+- name: create symlink to distributive redis checklist
   sudo: yes
   file:
     state: link
     src: /usr/share/distributive/redis.json
     dest: /etc/distributive.d/redis.json
+  notify: restart redis container
   tags:
     - consul
     - distributive

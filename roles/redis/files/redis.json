@@ -4,30 +4,16 @@
   "Checklist": [
     {
       "Name": "redis data directory",
-      "ID": "directory",
+      "Check": "directory",
       "Parameters": [
-        "/data"
-      ]
-    },
-    {
-      "Name": "redis server file",
-      "ID": "file",
-      "Parameters": [
-        "/usr/local/bin/redis-server"
-      ]
-    },
-    {
-      "Name": "redis cli file",
-      "ID": "file",
-      "Parameters": [
-        "/usr/local/bin/redis-cli"
+        "/home/redis/data"
       ]
     },
     {
       "Name": "redis communication port",
-      "ID": "port",
+      "Check": "TCP",
       "Parameters": [
-        "6379"
+        "localhost:6379"
       ]
     }
   ]

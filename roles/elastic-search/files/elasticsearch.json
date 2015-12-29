@@ -4,51 +4,37 @@
   "Checklist": [
     {
       "Name": "elasticsearch configuration directory",
-      "ID": "directory",
+      "Check": "directory",
       "Parameters": [
-        "/opt/elasticsearch/"
+        "/home/elasticsearch"
       ]
     },
     {
       "Name": "elasticsearch configuration file",
-      "ID": "file",
+      "Check": "file",
       "Parameters": [
-        "/opt/elasticsearch/elasticsearch.yml"
+        "/home/elasticsearch/config/elasticsearch.yml"
       ]
     },
     {
-      "Name": "logstash systemd service file",
-      "ID": "file",
+      "Name": "elasticsearch logging configuration file",
+      "Check": "file",
       "Parameters": [
-        "/usr/lib/systemd/system/logstash.service"
+        "/home/elasticsearch/config/logging.yml"
       ]
     },
     {
-      "Name": "rsyslog configuration file",
-      "ID": "file",
+      "Name": "Check admin port",
+      "Check": "TCP",
       "Parameters": [
-        "/etc/rsyslog.conf"
+        "localhost:9300"
       ]
     },
     {
-      "Name": "logstashd statsd port",
-      "ID": "PortUDP",
+      "Name": "Check application port",
+      "Check": "TCP",
       "Parameters": [
-        "8125"
-      ]
-    },
-    {
-      "Name": "logstashd collectd port",
-      "ID": "PortUDP",
-      "Parameters": [
-        "25826"
-      ]
-    },
-    {
-      "Name": "logstashd syslog port",
-      "ID": "port",
-      "Parameters": [
-        "1514"
+        "localhost:9200"
       ]
     }
   ]

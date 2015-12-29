@@ -1,4 +1,4 @@
-FROM cirrus-node3.dev.yaanatech.net:5000/centos7.1-nonet-20151201
+FROM cirrus-node3.dev.yaanatech.net:5000/centos-7.2-nonet-plus-20151217
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN groupadd -r redis && useradd -r -g redis redis

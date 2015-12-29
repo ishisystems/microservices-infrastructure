@@ -71,6 +71,7 @@
       - /home/elasticsearch/config:/opt/elasticsearch/config
       - /home/elasticsearch/data:/opt/elasticsearch/data
       - /usr/share/distributive:/usr/share/distributive
+      - /etc/distributive.d:/etc/distributive.d
   tags:
     - elastic-search
 

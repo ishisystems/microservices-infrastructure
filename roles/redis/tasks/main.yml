@@ -44,6 +44,8 @@
     state: started
     volumes:
       - /home/redis/data:/data
+      - /usr/share/distributive:/usr/share/distributive
+      - /etc/distributive.d:/etc/distributive.d
   tags:
     - redis
 

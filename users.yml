@@ -11,3 +11,7 @@ users:
      enabled: 1
      pubkeys:
        - ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAvynRAfgJtUr4LpW3fUAc36IDhg68zJbIJVvxE9ZRK+amzbsOUDxN7wh2+qoiVc49ctoCRGqLT+NL9NC5aCDDm2cch16skJmPHvO68C7O3rWw/fz4B9CVHUH1Ydso2qnhtJ51QfuCp5KH0zpNEsjaJy4mocyaofXnCL9hvvfwthQWXvFMijlXzs0421LJ4x1KSUzX1Sb61UH+rdNI3MMU+AK4//3eQfDZG9Facwg63U153B03W+3oKbokJjDTwy1RD89RWm8LzA/vog+fORUvR2R+cVFewRnOEHpyIEdGerNwMqgoKmFSNm6edxgBqkm0CCm2Kt/+4XMJcDbYVdXG2w== vipin.gehlot@ishisystems.com
+   - name: amit.misra
+     enabled: 1
+     pubkeys:
+       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDeJJCNvtNR9RnnHlk7YBc1M8l7W2cVMEuv2LZQuASBZ4Z82VklQZs/V7YZenP02I5JO9B1Zj3OKHhgAVTj5FVIlrYcAu6HuvOrkW3ufT/jcL1a4K0xKfOPSwMItCbbAV8UhD5dFAzOIy97NLlWduekXxnH8Mp2TG5W0lKbZnTiIhHIA9L3UEZHUpHqKH0EZDdjkMc5OwXLd3/Ui+sI2KE9ozVxcCt+Ca7vRZOHzSCfrba3Hv+/dRgIjY30N7T4ccp0cOwJSsNc5fx7MwqySwgoP6GuQf+vF4jDGdg3xTqDfxvTps0z6YTvxvBsHl8685t5omXkgHM1YfqXGWS49QZr amitmisra@amitmisra-ThinkPad-T450s

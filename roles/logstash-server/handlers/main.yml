@@ -3,24 +3,24 @@
   sudo: yes
   command: systemctl daemon-reload
   tags:
-    - logstash
+    - logstash-server
 
-- name: enable and start logstash
+- name: enable and start logstash-server
   sudo: yes
   service:
-    name: logstash
+    name: logstash-server
     enabled: yes
     state: started
   tags:
-    - logstash
+    - logstash-server
 
-- name: restart logstash
+- name: restart logstash-server
   sudo: yes
   service:
-    name: logstash
+    name: logstash-server
     state: restarted
   tags:
-    - logstash
+    - logstash-server
 
 - name: restart rsyslog
   sudo: yes
@@ -28,4 +28,8 @@
     name: rsyslog
     state: restarted
   tags:
-    - logstash
+    - logstash-server
+
+- name: reload consul
+  sudo: yes
+  command: "{{ consul_bin }} reload"

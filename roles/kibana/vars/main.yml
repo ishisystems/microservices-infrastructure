@@ -1,5 +1,5 @@
 ---
 # vars file for kibana
 
-elasticsearch_url: http://localhost:9200
+elasticsearch_url: http://elasticsearch.service.consul:9200
 kibana_container_name: kibana

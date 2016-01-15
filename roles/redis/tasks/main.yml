@@ -7,6 +7,7 @@
     state: directory
     mode: 0755
     owner: redis
+    group: redis
     recurse: yes
   with_items:
     - redis

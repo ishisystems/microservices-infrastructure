@@ -25,6 +25,7 @@ ExecStart=/usr/bin/docker run \
 {% endif %}
     --volume=/etc/logstash.d:/opt/logstash/conf.d \
     --volume=/var/log/mesos:/logs/mesos:ro \
+    --volume=/usr/share/distributive:/usr/share/distributive \
     --volume=/var/log/zookeeper:/logs/zookeeper:ro \
     --volume=/usr/share/collectd:/collectd:ro \
     {{ logstash_image }}:{{ logstash_image_tag }}

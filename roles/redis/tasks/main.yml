@@ -1,7 +1,7 @@
 ---
 # tasks file for redis
 - name: create folder for redis data
-  sudo: yes
+  become: yes
   file:
     name: /home/{{ item }}
     state: directory
@@ -16,7 +16,7 @@
     - redis
 
 - name: copy redis.json file
-  sudo: yes
+  become: yes
   copy:
     dest: /usr/share/distributive/redis.json
     src: redis.json
@@ -26,14 +26,14 @@
     - consul
 
 - name: ensure docker-redis docker image is present
-  sudo: yes
+  become: yes
   command: docker pull {{ docker_registry_fqdn }}:{{ docker_registry_port }}/{{ docker_redis_image }}:{{ docker_redis_image_tag }}
 #  notify: restart elastic-search container
   tags:
     - redis
 
 - name: run the container
-  sudo: yes
+  become: yes
   docker:
     detach: yes
     docker_api_version: '1.20'

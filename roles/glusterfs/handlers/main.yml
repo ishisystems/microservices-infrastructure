@@ -1,6 +1,6 @@
 ---
 - name: reload glusterfs
-  sudo: yes
+  become: yes
   command: "{{ item }}"
   with_items:
     - systemctl daemon-reload
@@ -8,5 +8,5 @@
     - systemctl restart glusterfsd
 
 - name: reload consul
-  sudo: yes
+  become: yes
   command: "consul reload"

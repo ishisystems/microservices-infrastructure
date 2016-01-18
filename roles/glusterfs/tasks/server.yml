@@ -1,6 +1,6 @@
 ---
 - name: format brick disk
-  sudo: yes
+  become: yes
   filesystem:
     dev: "{{ glusterfs_brick_device }}"
     fstype: xfs
@@ -10,7 +10,7 @@
     - disk
 
 - name: create mount point for brick disk
-  sudo: yes
+  become: yes
   file:
     state: directory
     name: "{{ glusterfs_brick_mount }}"
@@ -21,7 +21,7 @@
     - disk
 
 - name: mount brick disk
-  sudo: yes
+  become: yes
   mount:
     state: mounted
     name: "{{ glusterfs_brick_mount }}"
@@ -34,7 +34,7 @@
     - disk
 
 - name: ensure brick location is present
-  sudo: yes
+  become: yes
   file:
     state: directory
     path: "{{ glusterfs_brick_location }}"
@@ -42,7 +42,7 @@
     - glusterfs
 
 - name: install server packages
-  sudo: yes
+  become: yes
   yum:
     name: "{{ item }}"
     state: present
@@ -55,7 +55,7 @@
     - glusterfs
 
 - name: start services
-  sudo: yes
+  become: yes
   command: systemctl start {{ item }}
   with_items:
     - glusterd
@@ -65,14 +65,14 @@
 
 - name: probe servers
   run_once: true
-  sudo: yes
+  become: yes
   command: gluster peer probe {{ item }}.node.{{ consul_dns_domain }}
   with_items: groups[glusterfs_server_group]
   tags:
     - glusterfs
 
 - name: create gluster_volume script
-  sudo: yes
+  become: yes
   template:
     src: gluster_volume.sh.j2
     dest: /etc/glusterfs/gluster_volume.sh
@@ -82,13 +82,13 @@
 
 - name: create container volume
   run_once: true
-  sudo: yes
+  become: yes
   command: /etc/glusterfs/gluster_volume.sh {{ glusterfs_container_data_name }}
   tags:
     - glusterfs
 
 - name: start container volume
-  sudo: yes
+  become: yes
   run_once: true
   gluster_volume:
     name: "{{ glusterfs_container_data_name }}"
@@ -97,7 +97,7 @@
     - glusterfs
 
 - name: create consul service
-  sudo: yes
+  become: yes
   template:
     src: glusterfs.json.j2
     dest: /etc/consul/glusterfs.json

@@ -2,7 +2,7 @@
 # tasks file for elastic-search
 
 - name: create folder for elastic search data
-  sudo: yes
+  become: yes
   file:
     name: /home/{{ item }}
     state: directory
@@ -17,7 +17,7 @@
     - elastic-search
 
 - name: copy config file
-  sudo: yes
+  become: yes
   copy:
     dest: /home/elasticsearch/config/logging.yml
     mode: 0644
@@ -27,7 +27,7 @@
     - elastic-search
 
 - name: copy elasticsearch.json file
-  sudo: yes
+  become: yes
   copy:
     dest: /usr/share/distributive/elasticsearch.json
     src: elasticsearch.json
@@ -36,7 +36,7 @@
     - consul
 
 - name: setup docker drop in config file
-  sudo: yes
+  become: yes
   template:
     src: elasticsearch.yml.j2
     dest: /home/elasticsearch/config/elasticsearch.yml
@@ -46,14 +46,14 @@
     - elastic-search
 
 - name: ensure docker-elasticsearch docker image is present
-  sudo: yes
+  become: yes
   command: docker pull {{ docker_registry_fqdn }}:{{ docker_registry_port }}/{{ docker_elasticsearch_image }}:{{ docker_elasticsearch_image_tag }}
 #  notify: restart elastic-search container
   tags:
     - elastic-search
 
 - name: run the container
-  sudo: yes
+  become: yes
   docker:
     detach: yes
     docker_api_version: '1.20'

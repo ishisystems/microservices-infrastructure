@@ -3,7 +3,7 @@
   command: "/usr/local/bin/zookeeper-wait-for-listen.sh {{ inventory_hostname }}"
 
 - name: create zookeeper acl
-  sudo: yes
+  become: yes
   command: "{{ marathon_zk_acl_cmd }}"
   notify:
     - restart marathon
@@ -13,7 +13,7 @@
     - marathon
 
 - name: create marathon conf directory
-  sudo: yes
+  become: yes
   file:
     dest: /etc/marathon/conf
     state: directory
@@ -21,7 +21,7 @@
     - marathon
 
 - name: create marathon store directory
-  sudo: yes
+  become: yes
   file:
     dest: /etc/marathon/store
     state: directory
@@ -31,7 +31,7 @@
 - include: framework_auth.yml
 
 - name: set key/value options
-  sudo: yes
+  become: yes
   when: item.value != ""
   copy:
     dest: /etc/marathon/conf/{{ item.key }}
@@ -60,7 +60,7 @@
 
 - name: copy ssl keystore
   when: marathon_keystore_path != ""
-  sudo: yes
+  become: yes
   copy:
     src: "{{ marathon_keystore_path }}"
     dest: /etc/marathon/keystore.jks
@@ -71,7 +71,7 @@
 
 - name: create marathon_keystore_path
   when: marathon_keystore_path != ""
-  sudo: yes
+  become: yes
   copy:
     dest: /etc/marathon/conf/ssl_keystore_path
     content: /etc/marathon/keystore.jks
@@ -84,7 +84,7 @@
 # in a directory, we need to clean up old options when they become
 # unset.
 - name: remove blank options
-  sudo: yes
+  become: yes
   when: item.value == ""
   file:
     dest: /etc/marathon/conf/{{ item.key }}
@@ -104,7 +104,7 @@
 
 - name: remove ssl keystore
   when: marathon_keystore_path == ""
-  sudo: yes
+  become: yes
   file:
     dest: /etc/marathon/keystore.jks
     state: absent

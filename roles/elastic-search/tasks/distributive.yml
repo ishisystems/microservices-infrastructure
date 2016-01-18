@@ -2,7 +2,7 @@
 # some created directories may be redundant, but are kept in case anything else
 # changes, and to enable the picking and choosing of components/roles.
 - name: create consul configuration directory
-  sudo: yes
+  become: yes
   file:
     path: /etc/consul
     state: directory
@@ -13,7 +13,7 @@
     - elastic-search
 
 - name: create symlink to distributive elasticsearch checklist
-  sudo: yes
+  become: yes
   file:
     state: link
     src: /usr/share/distributive/elasticsearch.json
@@ -25,7 +25,7 @@
     - elastic-search
 
 - name: register distributive tests with consul
-  sudo: yes
+  become: yes
   copy:
     src: distributive-elasticsearch-check.json
     dest: /etc/consul/

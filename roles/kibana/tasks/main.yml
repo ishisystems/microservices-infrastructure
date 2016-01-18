@@ -2,7 +2,7 @@
 # tasks file for kibana
 
 - name: run the container
-  sudo: yes
+  become: yes
   docker:
     detach: yes
     docker_api_version: '1.20'

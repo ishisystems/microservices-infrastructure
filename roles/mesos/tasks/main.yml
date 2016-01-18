@@ -1,6 +1,6 @@
 ---
 #- name: add mesosphere repository
-#  sudo: yes
+#  become: yes
 #  yum:
 #    name:  http://repos.mesosphere.io/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm
 #    state: present
@@ -9,7 +9,7 @@
 #    - bootstrap
 
 - name: install mesos package
-  sudo: yes
+  become: yes
   yum:
     name: "{{ mesos_package }}"
     state: present
@@ -18,7 +18,7 @@
     - bootstrap
 
 - name: install cyrus-sasl-md5
-  sudo: yes
+  become: yes
   yum:
     name: cyrus-sasl-md5
     state: present
@@ -27,7 +27,7 @@
     - bootstrap
 
 - name: configure /etc/mesos/zk
-  sudo: yes
+  become: yes
   template:
     src: zk.j2
     dest: /etc/mesos/zk
@@ -35,7 +35,7 @@
     - mesos
 
 - name: configure /etc/mesos/hostname
-  sudo: yes
+  become: yes
   template:
     src: hostname.j2
     dest: /etc/mesos/hostname
@@ -44,7 +44,7 @@
     - mesos
 
 - name: disable mesos leader
-  sudo: yes
+  become: yes
   service:
     name: mesos-master
     enabled: no
@@ -53,7 +53,7 @@
     - mesos
 
 - name: configure mesos-master unit file
-  sudo: yes
+  become: yes
   replace:
     dest: /usr/lib/systemd/system/mesos-master.service
     regexp: "=network.target"
@@ -63,7 +63,7 @@
     - mesos
 
 - name: disable mesos follower
-  sudo: yes
+  become: yes
   service:
     name: mesos-slave
     enabled: no
@@ -72,7 +72,7 @@
     - mesos
 
 - name: ensure consul.d is present
-  sudo: yes
+  become: yes
   file:
     path: "{{ consul_dir }}"
     state: directory

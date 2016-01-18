@@ -1,7 +1,7 @@
 ---
 # default is etc/utc in build 20141129 [http://cloud.centos.org/centos/7/images/]
 - name: set timezone to etc/utc
-  sudo: yes
+  become: yes
   file:
     src: /usr/share/zoneinfo/Etc/UTC
     dest: /etc/localtime
@@ -10,7 +10,7 @@
 
 # add hosts to /etc/hosts
 - name: configure hosts file
-  sudo: yes
+  become: yes
   lineinfile:
     dest: /etc/hosts
     regexp: "^{{ hostvars[item].private_ipv4 }} {{ item }}{% if use_host_domain %} {{ item }}.{{ host_domain }}{% endif %}$"
@@ -20,7 +20,7 @@
   with_items: groups['all']
 
 - name: clean hosts file
-  sudo: yes
+  become: yes
   lineinfile:
     dest: /etc/hosts
     regexp: "{{ item }}"
@@ -30,7 +30,7 @@
     - '^::1(\s+){{ inventory_hostname }}.*'
 
 - name: install system utilities
-  sudo: yes
+  become: yes
   yum:
     name: "{{ item }}"
     state: latest
@@ -44,7 +44,7 @@
     - bootstrap
 
 - name: disable firewalld
-  sudo: yes
+  become: yes
   service:
     name: firewalld
     enabled: false
@@ -54,18 +54,18 @@
 
 - name: Install build essentials
   yum: name="@Development tools"
-  sudo: yes
+  become: yes
 
 - name: Install Python development package
   yum: name=python-devel
-  sudo: yes
+  become: yes
 
 - name: Install OpenSSL development package
   yum: name=openssl-devel
-  sudo: yes
+  become: yes
 
 - name: install pip and other dependencies
-  sudo: yes
+  become: yes
   yum:
     name: "{{ item.name }}"
     state: latest
@@ -74,7 +74,7 @@
     - name: libffi-devel
 
 - name: update setuptools and pip
-  sudo: yes
+  become: yes
   pip:
     name: "{{ item.name }}"
     state: latest
@@ -84,7 +84,7 @@
     - name: setuptools
 
 - name: install PyOpenSSL
-  sudo: yes
+  become: yes
   pip:
     name: "{{ item.name }}"
     state: latest
@@ -95,7 +95,7 @@
     - name: pyasn1
 
 - name: install distributive
-  sudo: yes
+  become: yes
   yum:
     name: "distributive"
     state: present
@@ -103,7 +103,7 @@
     - distributive
 
 - name: turn off abrt-ccpp
-  sudo: yes
+  become: yes
   service:
     name: abrt-ccpp
     state: stopped

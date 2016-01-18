@@ -1,6 +1,6 @@
 ---
 - name: install netcat
-  sudo: yes
+  become: yes
   yum:
     name: nmap-ncat
     state: present
@@ -9,7 +9,7 @@
     - bootstrap
 
 - name: install wait script
-  sudo: yes
+  become: yes
   copy:
     src: zookeeper-wait-for-listen.sh
     dest: /usr/local/bin
@@ -18,7 +18,7 @@
     - zookeeper
 
 - name: generate default env file
-  sudo: yes
+  become: yes
   template:
     src: zookeeper-env.j2
     dest: "/etc/default/{{ zookeeper_service }}"
@@ -28,7 +28,7 @@
     - zookeeper
 
 - name: generate systemd service file
-  sudo: yes
+  become: yes
   template:
     src: zookeeper-service.j2
     dest: "/usr/lib/systemd/system/{{ zookeeper_service }}.service"
@@ -39,13 +39,13 @@
     - zookeeper
 
 - name: ensure zookeeper docker image is present
-  sudo: yes
+  become: yes
   command: docker pull {{ zookeeper_image }}:{{ zookeeper_image_tag }}
   tags:
     - zookeeper
 
 - name: create zookeeper log directory
-  sudo: yes
+  become: yes
   file:
     path: /var/log/zookeeper
     state: directory
@@ -55,7 +55,7 @@
     - zookeeper
 
 - name: install zookeeper scripts
-  sudo: yes
+  become: yes
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -67,7 +67,7 @@
     - zookeeper
 
 - name: generate zookeeper consul services
-  sudo: yes
+  become: yes
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -84,7 +84,7 @@
 - meta: flush_handlers
 
 - name: ensure ZK is running
-  sudo: yes
+  become: yes
   service: 
     name: zookeeper
     state: started

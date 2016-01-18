@@ -1,6 +1,6 @@
 ---
 - name: create mount point for container volume
-  sudo: yes
+  become: yes
   file:
     state: directory
     name: "{{ glusterfs_container_data_mount }}"
@@ -10,7 +10,7 @@
     - glusterfs
 
 - name: mount container volume
-  sudo: yes
+  become: yes
   mount:
     state: mounted
     name: "{{ glusterfs_container_data_mount }}"

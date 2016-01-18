@@ -1,7 +1,7 @@
 ---
 # Workaround for https://github.com/CiscoCloud/microservices-infrastructure/issues/161
 - name: install latest device-mapper-libs
-  sudo: yes
+  become: yes
   yum:
     name: device-mapper-libs
     state: latest
@@ -10,7 +10,7 @@
     - bootstrap
 
 - name: install docker packages
-  sudo: yes
+  become: yes
   yum:
     name: "{{ item }}"
     state: present
@@ -22,7 +22,7 @@
     - bootstrap
 
 - name: create rsyslog.d
-  sudo: yes
+  become: yes
   file:
     dest: /etc/rsyslog.d
     state: directory
@@ -31,7 +31,7 @@
     - bootstrap
 
 - name: create docker entry for syslogd
-  sudo: yes
+  become: yes
   copy:
     dest: /etc/rsyslog.d/10-docker.conf
     content: |
@@ -45,7 +45,7 @@
     - bootstrap
 
 - name: setup env specific docker options
-  sudo: yes
+  become: yes
   template:
     src: docker-local.j2
     dest: /etc/sysconfig/docker-local
@@ -56,7 +56,7 @@
     - docker
 
 - name: setup docker drop in config file
-  sudo: yes
+  become: yes
   template:
     src: docker.j2
     dest: /etc/sysconfig/docker
@@ -67,7 +67,7 @@
     - docker
 
 - name: ensure docker-storage is using devicemapper and lvm
-  sudo: yes
+  become: yes
   lineinfile:
     dest: /etc/sysconfig/docker-storage
     regexp: ^DOCKER_STORAGE_OPTIONS=
@@ -80,7 +80,7 @@
     - docker
 
 - name: add docker-local options to existing docker config
-  sudo: yes
+  become: yes
   lineinfile:
     dest: /usr/lib/systemd/system/docker.service
     regexp: ^ExecStart=/usr/bin/docker 
@@ -93,7 +93,7 @@
     - docker
 
 - name: create docker.system.d
-  sudo: yes
+  become: yes
   file:
     dest: /etc/systemd/system/docker.service.d
     state: directory
@@ -101,7 +101,7 @@
     - docker
 
 - name: create local docker service override
-  sudo: yes
+  become: yes
   copy:
     dest: /etc/systemd/system/docker.service.d/local.conf
     content: |
@@ -113,7 +113,7 @@
     - docker
 
 - name: ensure docker config dir exists
-  sudo: yes
+  become: yes
   file:
     path: /root/.docker
     state: directory
@@ -121,7 +121,7 @@
     - docker
 
 - name: setup private docker registry credentials
-  sudo: yes
+  become: yes
   when: do_private_docker_registry
   template:
     src: config.json.j2
@@ -130,7 +130,7 @@
     - docker
 
 - name: add docker registry credentials to /etc/
-  sudo: yes
+  become: yes
   when: do_private_docker_registry
   command: tar cvzf /etc/docker.tar.gz .docker
   args:
@@ -139,7 +139,7 @@
     - docker
 
 - name: enable docker
-  sudo: yes
+  become: yes
   service:
     name: docker
     enabled: yes

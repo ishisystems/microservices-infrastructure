@@ -1,6 +1,6 @@
 ---
 - name: enable community repo
-  sudo: yes
+  become: yes
   get_url:
     url: https://download.gluster.org/pub/gluster/glusterfs/{{ glusterfs_minor_version }}/{{ glusterfs_version }}/CentOS/glusterfs-epel.repo
     dest: /etc/yum.repos.d/glusterfs-epel.repo
@@ -9,7 +9,7 @@
     - glusterfs
 
 - name: install packages
-  sudo: yes
+  become: yes
   yum:
     name: "{{ item }}"
     state: present

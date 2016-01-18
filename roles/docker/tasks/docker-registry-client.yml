@@ -1,5 +1,5 @@
 - name: create folder for certificate
-  sudo: yes
+  become: yes
   file:
     name: /etc/docker/certs.d/{{ docker_registry_fqdn }}:{{ docker_registry_hostport }}
     state: directory
@@ -8,7 +8,7 @@
     - docker-registry-client
 
 - name: copy cert file to docker certs
-  sudo: yes
+  become: yes
   copy:
     dest: /etc/docker/certs.d/{{ docker_registry_fqdn }}:{{ docker_registry_hostport }}/ca.crt
     mode: 0400
@@ -18,7 +18,7 @@
     - docker-registry-client
 
 - name: copy registry cert file
-  sudo: yes
+  become: yes
   copy:
     dest: /etc/pki/ca-trust/source/anchors/cirrus-node3.crt
     src: ssl/docker-registry.crt

@@ -1,10 +1,10 @@
 ---
 - name: restart mesos leader
-  sudo: yes
+  become: yes
   command: systemctl restart mesos-master
 
 - name: remove mesos follower metadata
-  sudo: yes
+  become: yes
   command: "{{ item }}"
   with_items:
     - systemctl stop mesos-slave
@@ -12,23 +12,23 @@
     - systemctl start mesos-slave
 
 - name: restart mesos follower
-  sudo: yes
+  become: yes
   command: systemctl restart mesos-slave
 
 - name: reload consul
-  sudo: yes
+  become: yes
   command: "{{ consul_bin }} reload"
 
 - name: restart nginx-mesos-leader
-  sudo: yes
+  become: yes
   command: systemctl restart nginx-mesos-leader
 
 - name: reload nginx-mesos-leader
-  sudo: yes
+  become: yes
   command: systemctl daemon-reload
 
 - name: restart collectd
-  sudo: yes
+  become: yes
   service:
     name: collectd
     state: restarted

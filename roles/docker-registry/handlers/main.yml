@@ -3,4 +3,4 @@
 
 - name: restart docker-registry container
   command: docker restart {{ docker_registry_container_name }}
-  sudo: yes
+  become: yes

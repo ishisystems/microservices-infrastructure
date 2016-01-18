@@ -1,6 +1,6 @@
 ---
 - name: install consul
-  sudo: yes
+  become: yes
   yum:
     name: consul-0.5.2-4.el7.centos
     state: present
@@ -10,7 +10,7 @@
     - bootstrap
 
 - name: install consul-ui
-  sudo: yes
+  become: yes
   yum:
     name: consul-ui
     state: present
@@ -21,7 +21,7 @@
     - bootstrap
 
 - name: install consul-utils
-  sudo: yes
+  become: yes
   yum:
     name: consul-utils
     state: present
@@ -31,7 +31,7 @@
     - bootstrap
 
 - name: configure consul
-  sudo: yes
+  become: yes
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -46,7 +46,7 @@
     - consul
 
 - name: register docker with consul
-  sudo: yes
+  become: yes
   copy:
     src: docker-service.json
     dest: /etc/consul
@@ -56,7 +56,7 @@
     - consul
 
 - name: deploy tls files
-  sudo: yes
+  become: yes
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -73,7 +73,7 @@
     - consul
 
 - name: configure consul acl policy
-  sudo: yes
+  become: yes
   template:
     src: acl.json.j2
     dest: /etc/consul/acl.json
@@ -83,7 +83,7 @@
     - consul
 
 - name: install consul scripts
-  sudo: yes
+  become: yes
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -97,7 +97,7 @@
     - consul
 
 - name: install check scripts
-  sudo: yes
+  become: yes
   copy:
     src: check-service-active
     dest: /usr/local/bin
@@ -106,7 +106,7 @@
     - consul
 
 - name: enable consul
-  sudo: yes
+  become: yes
   service:
     name: consul
     enabled: yes

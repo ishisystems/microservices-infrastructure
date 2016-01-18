@@ -14,7 +14,7 @@
 # openssl req -newkey rsa:4096 -nodes -sha256 -keyout /certs/domain.key -x509 -days 365 -out /certs/domain.crt
 
 - name: create folder for docker registry data
-  sudo: yes
+  become: yes
   file:
     name: /home/docker-registry
     state: directory
@@ -23,14 +23,14 @@
     - docker-registry
 
 - name: ensure docker-registry docker image is present
-  sudo: yes
+  become: yes
   command: docker pull {{ docker_registry_image }}:{{ docker_registry_image_tag }}
   notify: restart docker-registry container
   tags:
     - docker-registry
 
 - name: copy cert file to mount directory
-  sudo: yes
+  become: yes
   copy:
     dest: /certs/domain.crt
     mode: 0400
@@ -41,7 +41,7 @@
     - docker-registry
 
 - name: copy key file to mount directory
-  sudo: yes
+  become: yes
   copy:
     dest: /certs/domain.key
     mode: 0400
@@ -52,7 +52,7 @@
     - docker-registry
 
 - name: copy config file
-  sudo: yes
+  become: yes
   copy:
     dest: /docker-registry-config.yml
     mode: 0400
@@ -63,7 +63,7 @@
     - docker-registry
 
 - name: run registry as docker container
-  sudo: yes
+  become: yes
   docker:
     detach: yes
     docker_api_version: '1.20'

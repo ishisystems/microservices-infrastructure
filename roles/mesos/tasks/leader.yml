@@ -1,6 +1,6 @@
 ---
 - name: configure leader defaults
-  sudo: yes
+  become: yes
   template:
     src: master-defaults.j2
     dest: /etc/default/mesos-master
@@ -10,7 +10,7 @@
     - mesos
 
 - name: write leader credentials
-  sudo: yes
+  become: yes
   when: do_mesos_framework_auth|bool or do_mesos_follower_auth|bool
   template:
     src: master-credentials.j2
@@ -22,7 +22,7 @@
     - mesos
 
 - name: delete leader credentials
-  sudo: yes
+  become: yes
   when: not do_mesos_framework_auth|bool and not do_mesos_follower_auth|bool
   file:
     dest: /etc/mesos/credentials
@@ -34,7 +34,7 @@
   command: "/usr/local/bin/zookeeper-wait-for-listen.sh {{ inventory_hostname }}"
 
 - name: create zookeeper acl
-  sudo: yes
+  become: yes
   command: "{{ mesos_zk_acl_cmd }}"
   notify:
     - restart mesos leader
@@ -44,7 +44,7 @@
     - mesos
 
 - name: deploy iptables configuration
-  sudo: yes
+  become: yes
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -57,7 +57,7 @@
     - mesos
 
 - name: deploy iptables template
-  sudo: yes
+  become: yes
   template:
     src: mesos-leader-iptables.tmpl.j2
     dest: /etc/consul-template/templates/mesos-leader-iptables.tmpl
@@ -67,7 +67,7 @@
     - mesos
 
 - name: install collectd mesos-master plugin
-  sudo: yes
+  become: yes
   copy:
     src: mesos-master.py
     dest: /usr/share/collectd/plugins
@@ -77,7 +77,7 @@
     - collectd
 
 - name: configure collectd mesos-master plugin
-  sudo: yes
+  become: yes
   template:
     src: mesos-master.conf.j2
     dest: /etc/collectd.d/mesos-master.conf

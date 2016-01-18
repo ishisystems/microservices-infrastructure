@@ -1,6 +1,6 @@
 ---
 - name: install collectd docker plugin dependencies
-  sudo: yes
+  become: yes
   pip:
     name: "{{ item }}"
     state: present
@@ -14,7 +14,7 @@
     - collectd
 
 - name: create collectd config directory
-  sudo: yes
+  become: yes
   file:
     path: /etc/collectd.d
     state: directory
@@ -24,7 +24,7 @@
     - collectd
 
 - name: create collectd plugin directory
-  sudo: yes
+  become: yes
   file:
     path: /usr/share/collectd/plugins
     state: directory
@@ -34,7 +34,7 @@
     - collectd
 
 - name: install collectd docker plugin
-  sudo: yes
+  become: yes
   copy:
     src: "{{ item }}"
     dest: "/usr/share/collectd/plugins/{{ item }}"
@@ -44,7 +44,7 @@
     - dockerplugin.db
 
 - name: configure collectd docker plugin
-  sudo: yes
+  become: yes
   copy:
     src: dockerplugin.conf
     dest: /etc/collectd.d/docker.conf

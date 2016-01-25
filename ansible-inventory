@@ -16,6 +16,7 @@ cirrus-node5 ansible_ssh_host=172.21.82.75 ansible_ssh_port=2022 private_ipv4=17
 cirrus-node6 ansible_ssh_host=172.21.82.76 ansible_ssh_port=2022 private_ipv4=172.21.82.76
 cirrus-node7 ansible_ssh_host=172.21.82.77 ansible_ssh_port=2022 private_ipv4=172.21.82.77
 # cirrus-node8 ansible_ssh_host=172.21.82.78 ansible_ssh_port=2022 private_ipv4=172.21.82.78
+cirrus-tjm1 ansible_ssh_host=172.21.82.78 ansible_ssh_port=2022 private_ipv4=172.21.82.78
 
 [role=control]
 cirrus-node2
@@ -41,3 +42,6 @@ cirrus-node3
 
 [role=kibana]
 cirrus-node3
+
+[jenkins]
+cirrus-tjm1 ansible_ssh_host=172.21.82.78 ansible_ssh_port=2022 private_ipv4=172.21.82.78

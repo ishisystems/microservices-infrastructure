@@ -1,0 +1,21 @@
+---
+
+#- name: Install python-software-properties
+#  yum: name=python-software-properties state=installed update_cache=yes
+
+- name: Install python-pycurl
+  yum: name=python-pycurl state=installed
+
+- name: Import jenkins key
+  shell: rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+  become: yes
+  become_method: sudo
+#  rpm_key:
+#    key: http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+#    state: present
+#    validate_certs: no
+
+- name: Get jenkins repo for ansible
+  get_url:
+    url: http://pkg.jenkins-ci.org/redhat/jenkins.repo
+    dest: /etc/yum.repos.d/jenkins.repo

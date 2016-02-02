@@ -1,8 +1,15 @@
 ---
 # tasks file for kibana
 
+- name: add user
+  become: yes
+  user:
+    name: kibana
+    comment: "kibana"
+
 - name: run the container
   become: yes
+  become_user: kibana
   docker:
     detach: yes
     docker_api_version: '1.20'

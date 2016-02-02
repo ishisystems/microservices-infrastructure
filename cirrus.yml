@@ -18,21 +18,21 @@
 ## documentation for each of these components in their README file in the
 ## `roles/` directory, or by checking the online documentation at
 ## microservices-infrastructure.readthedocs.org.
-- hosts: all
-  vars:
-    # consul_acl_datacenter should be set to the datacenter you want to control
-    # Consul ACLs. If you only have one datacenter, set it to that or remove
-    # this variable.
-    # consul_acl_datacenter: your_primary_datacenter
+# - hosts: all
+#   vars:
+#     # consul_acl_datacenter should be set to the datacenter you want to control
+#     # Consul ACLs. If you only have one datacenter, set it to that or remove
+#     # this variable.
+#     # consul_acl_datacenter: your_primary_datacenter
 
-    # consul_dns_domain is repeated across these plays so that all the
-    # components know what information to use for this values to help with
-    # service discovery.
-    consul_dns_domain: consul
-    consul_servers_group: role=control
-    consul_dc_group: dc=teldata
-  roles:
-    - common
+#     # consul_dns_domain is repeated across these plays so that all the
+#     # components know what information to use for this values to help with
+#     # service discovery.
+#     consul_dns_domain: consul
+#     consul_servers_group: role=control
+#     consul_dc_group: dc=teldata
+#   roles:
+#     - common
     #- collectd
     #- docker
     #- logstash
@@ -60,17 +60,16 @@
 ## run software that the Mesos leader shedules. It also forwards traffic to
 ## globally known ports configured through Marathon.
 # - hosts: role=worker
-#   # role=worker hosts are a subset of "all". Since we already gathered facts on
-#   # all servers, we can skip it here to speed up the deployment.
+   # role=worker hosts are a subset of "all". Since we already gathered facts on
+   # all servers, we can skip it here to speed up the deployment.
 #   gather_facts: no
 #   vars:
 #     consul_dns_domain: consul
 #     mesos_mode: follower
-
-#     # Set this to whatever domain you want to reach haproxy from; it should be
-#     # in this format: [short-name]-lb.[domain], where [short-name] and [domain]
-#     # are the same as configured in terraform.
-#     # In this example, short-name is "mi" and domain is "example.com":
+     # Set this to whatever domain you want to reach haproxy from; it should be
+     # in this format: [short-name]-lb.[domain], where [short-name] and [domain]
+     # are the same as configured in terraform.
+     # In this example, short-name is "mi" and domain is "example.com":
 #   roles:
 #     - mesos
 #     - haproxy
@@ -80,16 +79,16 @@
 # manage secrets in the cluster. These servers do not run applications by
 # themselves, they only schedule work. That said, there should be at least 3 of
 # them (and always an odd number) so that ZooKeeper can get and keep a quorum.
-# - hosts: role=control
-#   gather_facts: no
-#   vars:
-#     consul_dns_domain: consul
-#     consul_servers_group: role=control
-#     mesos_leaders_group: role=control
-#     mesos_mode: leader
-#     zookeeper_server_group: role=control
-#   roles:
-#     - vault
+ # - hosts: role=control
+ #   gather_facts: no
+ #   vars:
+ #     consul_dns_domain: consul
+ #     consul_servers_group: role=control
+ #     mesos_leaders_group: role=control
+ #     mesos_mode: leader
+ #     zookeeper_server_group: role=control
+ #   roles:
+ #     - vault
 #     - zookeeper
 #     - mesos
 #     - marathon
@@ -129,6 +128,6 @@
 #   roles:
 #     - logstash-server
 
-# - hosts: role=kibana
-#   roles:
-#     - kibana
+- hosts: role=kibana
+  roles:
+    - kibana

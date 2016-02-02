@@ -1,12 +1,14 @@
 ---
 - name: reload vault
   become: yes
+  become_user: vault
   command: systemctl reload vault
   notify:
     - wait for vault to listen
 
 - name: restart vault
   become: yes
+  become_user: vault
   command: systemctl restart vault
   notify:
     - wait for vault to listen

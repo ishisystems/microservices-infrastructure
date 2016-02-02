@@ -33,21 +33,21 @@
     consul_dc_group: dc=teldata
   roles:
     - common
-    - collectd
-    - docker
-    - logstash
-    - logrotate
-    - consul
-    - dnsmasq
-#
-- hosts: role=mesos
-  vars:
-    consul_dns_domain: consul
-    consul_dc_group: dc=teldata
-    consul_servers_group: role=control
-  roles:
-    - consul-template
-    - nginx
+    #- collectd
+    #- docker
+    #- logstash
+    #- logrotate
+    #- consul
+    #- dnsmasq
+
+# - hosts: role=mesos
+#   vars:
+#     consul_dns_domain: consul
+#     consul_dc_group: dc=teldata
+#     consul_servers_group: role=control
+#   roles:
+#     - consul-template
+#     - nginx
 
 ## ROLES - after provisioning the software that's common to all hosts, we do
 ## specialized hosts. This configuration has two major groups: control nodes and
@@ -59,97 +59,76 @@
 ## The worker role itself has a minimal configuration, as it's designed mainly to
 ## run software that the Mesos leader shedules. It also forwards traffic to
 ## globally known ports configured through Marathon.
-- hosts: role=worker
-  # role=worker hosts are a subset of "all". Since we already gathered facts on
-  # all servers, we can skip it here to speed up the deployment.
-  gather_facts: no
-  vars:
-    consul_dns_domain: consul
-    mesos_mode: follower
+# - hosts: role=worker
+#   # role=worker hosts are a subset of "all". Since we already gathered facts on
+#   # all servers, we can skip it here to speed up the deployment.
+#   gather_facts: no
+#   vars:
+#     consul_dns_domain: consul
+#     mesos_mode: follower
 
-    # Set this to whatever domain you want to reach haproxy from; it should be
-    # in this format: [short-name]-lb.[domain], where [short-name] and [domain]
-    # are the same as configured in terraform.
-    # In this example, short-name is "mi" and domain is "example.com":
-    haproxy_domain: tel-lb.yaanatech.com
-  roles:
-    - mesos
-    - haproxy
+#     # Set this to whatever domain you want to reach haproxy from; it should be
+#     # in this format: [short-name]-lb.[domain], where [short-name] and [domain]
+#     # are the same as configured in terraform.
+#     # In this example, short-name is "mi" and domain is "example.com":
+#   roles:
+#     - mesos
+#     - haproxy
 
-## the control nodes are necessarily more complex than the worker nodes, and have
-## ZooKeeper, Mesos, and Marathon leaders. In addition, they control Vault to
-## manage secrets in the cluster. These servers do not run applications by
-## themselves, they only schedule work. That said, there should be at least 3 of
-## them (and always an odd number) so that ZooKeeper can get and keep a quorum.
-- hosts: role=control
-  gather_facts: no
-  vars:
-    consul_dns_domain: consul
-    consul_servers_group: role=control
-    mesos_leaders_group: role=control
-    mesos_mode: leader
-    zookeeper_server_group: role=control
-  roles:
-    - vault
-    - zookeeper
-    - mesos
-    - marathon
-    - chronos
-    - mantlui
+# the control nodes are necessarily more complex than the worker nodes, and have
+# ZooKeeper, Mesos, and Marathon leaders. In addition, they control Vault to
+# manage secrets in the cluster. These servers do not run applications by
+# themselves, they only schedule work. That said, there should be at least 3 of
+# them (and always an odd number) so that ZooKeeper can get and keep a quorum.
+# - hosts: role=control
+#   gather_facts: no
+#   vars:
+#     consul_dns_domain: consul
+#     consul_servers_group: role=control
+#     mesos_leaders_group: role=control
+#     mesos_mode: leader
+#     zookeeper_server_group: role=control
+#   roles:
+#     - vault
+#     - zookeeper
+#     - mesos
+#     - marathon
+#     - chronos
+#     - mantlui
 
-## GlusterFS has to be provisioned in reverse order from Mesos: servers then
-## clients.
-#- hosts: role=control
-#  gather_facts: no
-#  vars:
-#    consul_dns_domain: consul
-#    glusterfs_mode: server
-#  roles:
+# GlusterFS has to be provisioned in reverse order from Mesos: servers then
+# clients.
+# - hosts: role=control
+#   gather_facts: no
+#   vars:
+#     consul_dns_domain: consul
+#     glusterfs_mode: server
+#   roles:
+#     - glusterfs
+
+# - hosts: role=worker
+#   vars:
+#     consul_dns_domain: consul
+#     glusterfs_mode: client
+#    roles:
 #    - glusterfs
-#
-#- hosts: role=worker
-#  vars:
-#    consul_dns_domain: consul
-#    glusterfs_mode: client
-#  roles:
-#    - glusterfs
 
-- hosts: role=docker-registry
-  vars:
-    proxy_env:
-      http_proxy: https://tel-proxy.yaanatech.net:3128
-  roles:
-    - docker-registry
+# - hosts: role=docker-registry
+#   roles:
+#     - docker-registry
 
-- hosts: role=elasticsearch
-  vars:
-    proxy_env:
-      http_proxy: https://tel-proxy.yaanatech.net:3128
-  roles:
-    - elastic-search
+# - hosts: role=elasticsearch
+#   roles:
+#     - elastic-search
 
-- hosts: role=redis
-  vars:
-    proxy_env:
-      http_proxy: https://tel-proxy.yaanatech.net:3128
-  roles:
-    - redis
+# - hosts: role=redis
+#   roles:
+#     - redis
 
-- hosts: role=logstash-server
-  vars:
-    proxy_env:
-      http_proxy: https://tel-proxy.yaanatech.net:3128
-  roles:
-    - logstash-server
+# - hosts: role=logstash-server
+#   roles:
+#     - logstash-server
 
-- hosts: role=kibana
-  roles:
-    - kibana
-
-- hosts: jenkins
-  become_method: sudo
-  vars:
-      proxy_env:
-        http_proxy: https://tel-proxy.yaanatech.net:3128
-  roles:
-    - jenkins
+# - hosts: role=kibana
+#   roles:
+#     - kibana

@@ -24,14 +24,14 @@
     - distributive
     - redis
 
-- name: register distributive tests with consul
-  become: yes
-  copy:
-    src: distributive-redis-check.json
-    dest: /etc/consul/
-  notify:
-    - reload consul
-  tags:
-    - consul
-    - distributive
-    - redis
+# - name: register distributive tests with consul
+#   become: yes
+#   copy:
+#     src: distributive-redis-check.json
+#     dest: /etc/consul/
+#   notify:
+#     - reload consul
+#   tags:
+#     - consul
+#     - distributive
+#     - redis

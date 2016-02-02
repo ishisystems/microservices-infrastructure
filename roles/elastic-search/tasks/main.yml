@@ -1,5 +1,8 @@
 ---
 # tasks file for elastic-search
+- name: Make elasticsearch user
+  become: yes
+  user: name=elasticsearch comment="elastic search"
 
 - name: create folder for elastic search data
   become: yes
@@ -45,9 +48,16 @@
   tags:
     - elastic-search
 
+# - name: ensure docker-elasticsearch docker image is present
+#   become: yes
+#   command: docker pull {{ docker_registry_fqdn }}:{{ docker_registry_port }}/{{ docker_elasticsearch_image }}:{{ docker_elasticsearch_image_tag }}
+# #  notify: restart elastic-search container
+#   tags:
+#     - elastic-search
+
 - name: ensure docker-elasticsearch docker image is present
   become: yes
-  command: docker pull {{ docker_registry_fqdn }}:{{ docker_registry_port }}/{{ docker_elasticsearch_image }}:{{ docker_elasticsearch_image_tag }}
+  command: docker pull elasticsearch
 #  notify: restart elastic-search container
   tags:
     - elastic-search
@@ -60,8 +70,8 @@
     #env:
     #  REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
     #  REGISTRY_HTTP_TLS_KEY: /certs/domain.key
-    image: "{{ docker_registry_fqdn }}:{{ docker_registry_port }}/{{ docker_elasticsearch_image }}:{{ docker_elasticsearch_image_tag }}"
-    name: "{{ elastic_search_container_name }}"
+    image: elasticsearch
+    name: elasticsearch
     ports:
       - 9200:9200
       - 9300:9300

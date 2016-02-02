@@ -1,11 +1,11 @@
-docker_proxy: tel-proxy.yaanatech.net:3128
-docker_registry_port: 5000
-docker_registry_fqdn: cirrus-node3.dev.yaanatech.net
-docker_no_proxy_domains: .dev.yaanatech.net
+# docker_proxy: tel-proxy.yaanatech.net:3128
+# docker_registry_port: 5000
+# docker_registry_fqdn: cirrus-node3.dev.yaanatech.net
+# docker_no_proxy_domains: .dev.yaanatech.net
 
-docker_registry_host: cirrus-node3.dev.yaanatech.net
+# docker_registry_host: cirrus-node3.dev.yaanatech.net
 
 ansible_become_method: su
-ansible_become_pass: cirrus
+ansible_become_pass: "@n$ibl3H7"
 ansible_become_user: root
 

@@ -1,12 +1,12 @@
 ---
-#- name: install vault
-#  become: yes
-#  yum:
-#    name: "https://bintray.com/artifact/download/stevendborrelli/rpm/vault-0.1.0-1.el7.centos.x86_64.rpm"
-#    state: present
-#  tags:
-#    - vault
-#    - bootstrap
+- name: install vault
+  become: yes
+  yum:
+    name: "https://bintray.com/artifact/download/stevendborrelli/rpm/vault-0.1.0-1.el7.centos.x86_64.rpm"
+    state: present
+  tags:
+    - vault
+    - bootstrap
 
 - name: configure vault service
   become: yes

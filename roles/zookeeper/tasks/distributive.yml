@@ -23,14 +23,14 @@
     - distributive
     - zookeeper
 
-- name: register distributive tests with consul
-  become: yes
-  template:
-    src: distributive-zookeeper-check.json.j2
-    dest: /etc/consul/distributive-zookeeper-check.json
-  notify:
-    - reload consul
-  tags:
-    - consul
-    - distributive
-    - zookeeper
+# - name: register distributive tests with consul
+#   become: yes
+#   template:
+#     src: distributive-zookeeper-check.json.j2
+#     dest: /etc/consul/distributive-zookeeper-check.json
+#   notify:
+#     - reload consul
+#   tags:
+#     - consul
+#     - distributive
+#     - zookeeper

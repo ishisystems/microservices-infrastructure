@@ -23,14 +23,14 @@
     - distributive
     - dnsmasq
 
-- name: register distributive tests with consul
-  become: yes
-  copy:
-    src: distributive-dnsmasq-check.json
-    dest: /etc/consul/
-  notify:
-    - reload consul
-  tags:
-    - consul
-    - distributive
-    - dnsmasq
+# - name: register distributive tests with consul
+#   become: yes
+#   copy:
+#     src: distributive-dnsmasq-check.json
+#     dest: /etc/consul/
+#   notify:
+#     - reload consul
+#   tags:
+#     - consul
+#     - distributive
+#     - dnsmasq

@@ -1,5 +1,9 @@
 ---
 # tasks file for redis
+- name: Make redis user
+  become: yes
+  user: name=redis comment="redis"
+
 - name: create folder for redis data
   become: yes
   file:
@@ -27,7 +31,7 @@
 
 - name: ensure docker-redis docker image is present
   become: yes
-  command: docker pull {{ docker_registry_fqdn }}:{{ docker_registry_port }}/{{ docker_redis_image }}:{{ docker_redis_image_tag }}
+  command: docker pull redis
 #  notify: restart elastic-search container
   tags:
     - redis
@@ -37,8 +41,8 @@
   docker:
     detach: yes
     docker_api_version: '1.20'
-    image: "{{ docker_registry_fqdn }}:{{ docker_registry_port }}/{{ docker_redis_image }}:{{ docker_redis_image_tag }}"
-    name: "{{ redis_container_name }}"
+    image: redis
+    name: redis
     ports:
       - 6379:6379
     restart_policy: always

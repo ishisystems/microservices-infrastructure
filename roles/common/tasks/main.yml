@@ -43,14 +43,14 @@
   tags:
     - bootstrap
 
-- name: disable firewalld
-  become: yes
-  service:
-    name: firewalld
-    enabled: false
-    state: stopped
-  register: command_result
-  failed_when: "command_result|failed and 'No such file or directory' not in command_result.msg"
+#- name: disable firewalld
+#  become: yes
+#  service:
+#    name: firewalld
+#    enabled: false
+#    state: stopped
+#  register: command_result
+#  failed_when: "command_result|failed and 'No such file or directory' not in command_result.msg"
 
 - name: Install build essentials
   yum: name="@Development tools"
@@ -63,6 +63,10 @@
 - name: Install OpenSSL development package
   yum: name=openssl-devel
   become: yes
+
+- name: Install EPEL repo (chintan to install pip).
+  become: yes
+  yum: name=epel-release state=present
 
 - name: install pip and other dependencies
   become: yes
@@ -78,36 +82,43 @@
   pip:
     name: "{{ item.name }}"
     state: latest
-    extra_args: '--proxy https://tel-proxy.yaanatech.net:3128'
+#    extra_args: '--proxy https://tel-proxy.yaanatech.net:3128'
   with_items:
     - name: pip
     - name: setuptools
 
-- name: install PyOpenSSL
+- name: install PyOpenSSL 
   become: yes
   pip:
     name: "{{ item.name }}"
     state: latest
-    extra_args: '--proxy https://tel-proxy.yaanatech.net:3128'
+#    extra_args: '--proxy https://tel-proxy.yaanatech.net:3128'
   with_items:
     - name: pyopenssl 
     - name: ndg-httpsclient 
     - name: pyasn1
 
+#- name: install distributive
+#  become: yes
+#  yum:
+#    name: "distributive"
+#    state: present
+#  tags:
+#    - distributive
+
 - name: install distributive
   become: yes
   yum:
-    name: "distributive"
+    name: "https://dl.bintray.com/ciscocloud/rpm/distributive-0.2.1-5.el7.centos.x86_64.rpm"
     state: present
   tags:
     - distributive
-
-- name: turn off abrt-ccpp
-  become: yes
-  service:
-    name: abrt-ccpp
-    state: stopped
-    enabled: no
+#- name: turn off abrt-ccpp
+#  become: yes
+#  service:
+#    name: abrt-ccpp
+#    state: stopped
+#    enabled: no
 
 - include: users.yml
 - include: ssl.yml

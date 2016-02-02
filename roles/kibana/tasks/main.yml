@@ -8,8 +8,8 @@
     docker_api_version: '1.20'
     env:
       ELASTICSEARCH_URL: "{{ elasticsearch_url }}"
-    image: "{{ docker_registry_fqdn }}:{{ docker_registry_port }}/kibana4:v0.1"
-    name: "{{ kibana_container_name }}"
+    image: kibana
+    name: kibana
     ports:
       - 5601:5601
     restart_policy: always

@@ -55,12 +55,13 @@
   tags:
     - collectd
 
-- name: authorize collectd to connect to docker
-  become: yes
-  shell: semodule -i /tmp/collectd_docker_plugin.pp
-  when: "semodule_list.stdout is defined and semodule_list.stdout.find('collectd_docker_plugin') == -1"
-  tags:
-    - collectd
+# done manually, error semodule not found
+#- name: authorize collectd to connect to docker
+#  become: yes
+#  shell: semodule -i /tmp/collectd_docker_plugin.pp
+#  when: "semodule_list.stdout is defined and semodule_list.stdout.find('collectd_docker_plugin') == -1"
+#  tags:
+#    - collectd
 
 - name: enable collectd
   become: yes

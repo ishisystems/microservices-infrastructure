@@ -84,13 +84,13 @@
   lineinfile:
     dest: /usr/lib/systemd/system/docker.service
     regexp: ^ExecStart=/usr/bin/docker 
-    line: ExecStart=/usr/bin/docker daemon $OPTIONS $other_arg \\
+    line: ExecStart=/usr/bin/docker daemon -H /root/
     state: present
     create: yes
   notify:
     - reload docker
   tags:
-    - docker
+     - docker
 
 - name: create docker.system.d
   become: yes

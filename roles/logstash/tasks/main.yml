@@ -46,12 +46,12 @@
   tags:
     - logstash
 
-- name: authorize logstash syslog port
-  become: yes
-  shell: semanage port -a -t syslogd_port_t -p tcp 1514
-  when: selinux_syslog_port_check.rc is defined and selinux_syslog_port_check.rc != 0
-  tags:
-    - logstash
+# - name: authorize logstash syslog port
+#   become: yes
+#   shell: semanage port -a -t syslogd_port_t -p tcp 1514
+#   when: selinux_syslog_port_check.rc is defined and selinux_syslog_port_check.rc != 0
+#   tags:
+#     - logstash
 
 - name: forward all logs from rsyslog to logstash
   become: yes

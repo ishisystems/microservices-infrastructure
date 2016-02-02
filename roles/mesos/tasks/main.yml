@@ -1,12 +1,12 @@
 ---
-#- name: add mesosphere repository
-#  become: yes
-#  yum:
-#    name:  http://repos.mesosphere.io/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm
-#    state: present
-#  tags:
-#    - mesos
-#    - bootstrap
+- name: add mesosphere repository
+  become: yes
+  yum:
+    name:  http://repos.mesosphere.io/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm
+    state: present
+  tags:
+    - mesos
+    - bootstrap
 
 - name: install mesos package
   become: yes
@@ -30,7 +30,7 @@
   become: yes
   template:
     src: zk.j2
-    dest: /etc/mesos/zk
+    dest: /usr/etc/mesos/zk
   tags:
     - mesos
 
@@ -38,7 +38,7 @@
   become: yes
   template:
     src: hostname.j2
-    dest: /etc/mesos/hostname
+    dest: /usr/etc/mesos/hostname
     mode: 0600
   tags:
     - mesos
@@ -52,15 +52,15 @@
   tags:
     - mesos
 
-- name: configure mesos-master unit file
-  become: yes
-  replace:
-    dest: /usr/lib/systemd/system/mesos-master.service
-    regexp: "=network.target"
-    replace: '=zookeeper.service'
-  when: mesos_mode == "leader"
-  tags:
-    - mesos
+# - name: configure mesos-master unit file
+#   become: yes
+#   replace:
+#     dest: /usr/lib/systemd/system/mesos-master.service
+#     regexp: "=network.target"
+#     replace: '=zookeeper.service'
+#   when: mesos_mode == "leader"
+#   tags:
+#     - mesos
 
 - name: disable mesos follower
   become: yes
@@ -79,8 +79,8 @@
   tags:
     - mesos
 
-- include: leader.yml
-  when: mesos_mode == "leader" or mesos_mode == "mixed"
+# - include: leader.yml
+#   when: mesos_mode == "leader" or mesos_mode == "mixed"
 
-- include: follower.yml
-  when: mesos_mode == "follower" or mesos_mode == "mixed"
+# - include: follower.yml
+#   when: mesos_mode == "follower" or mesos_mode == "mixed"

@@ -1,0 +1,49 @@
+---
+chronos_http_credentials: admin:admin
+chronos_principal: chronos
+chronos_secret: y6mOON70xhTde/YlqLKvvjUQq8KtSersDxcGIuiOk0i0
+consul_acl_agent_token: 4a468803-332f-45e0-8d02-7570b3477fe3
+consul_acl_master_token: 78e760ea-cebc-4181-aa03-e520e7bbc883
+consul_default_acl_policy: allow
+consul_gossip_key: r1Kxz1J10LYxiObqiRSm/A==
+do_chronos_auth: true
+do_chronos_iptables: true
+do_chronos_ssl: true
+do_consul_auth: true
+do_consul_ssl: true
+do_mantl_api_auth: true
+do_mantlui_auth: true
+do_mantlui_ssl: true
+do_marathon_auth: true
+do_marathon_iptables: true
+do_marathon_ssl: true
+do_mesos_auth: true
+do_mesos_follower_auth: true
+do_mesos_framework_auth: true
+do_mesos_iptables: true
+do_mesos_ssl: true
+do_private_docker_registry: false
+mantl_api_principal: mantl-api
+mantl_api_secret: m3zFHJfG61/OYlzKdlz8rSAl5U/NC1Gb2NEQMUPtLlZA
+marathon_http_credentials: admin:admin
+marathon_principal: marathon
+marathon_secret: m0+1j5k0Hg35pCda5rqw7jukpFWFoaS6gE/OB76ibfLx
+mesos_credentials:
+- {principal: marathon, secret: m0+1j5k0Hg35pCda5rqw7jukpFWFoaS6gE/OB76ibfLx}
+- {principal: chronos, secret: y6mOON70xhTde/YlqLKvvjUQq8KtSersDxcGIuiOk0i0}
+- {principal: mantl-api, secret: m3zFHJfG61/OYlzKdlz8rSAl5U/NC1Gb2NEQMUPtLlZA}
+mesos_follower_principal: follower
+mesos_follower_secret: ni59S5yTIZBKgBLeRzl+NG4TxRjOIcI6zZ1Uqc2Uh3Wy
+nginx_admin_password: admin
+security_enabled: true
+zk_chronos_user: chronos
+zk_chronos_user_secret: QbQhKFcLneqTigpj
+zk_chronos_user_secret_digest: v4Tkk1zM9/jvoYfjwB3qjhCyb8U=
+zk_marathon_user: marathon
+zk_marathon_user_secret: y6j71UQL84AtK3lg
+zk_marathon_user_secret_digest: KcRxNF2FOcepKVUzGQBdjBKxvNc=
+zk_mesos_user: mesos
+zk_mesos_user_secret: vEImSXkgpIE8fuU7
+zk_mesos_user_secret_digest: mAysFIwSQyfRDmssM0xFBllW5Cw=
+zk_super_user: super
+zk_super_user_secret: 05xc3py86hc3DFfz56jTowLf3/uYcn/Q++B/tq4TAtoB

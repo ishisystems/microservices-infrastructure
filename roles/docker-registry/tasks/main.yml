@@ -32,7 +32,7 @@
 - name: copy cert file to mount directory
   become: yes
   copy:
-    dest: /certs/domain.crt
+    dest: /etc/ssl/certs/domain.crt
     mode: 0400
     src: ssl/docker-registry.crt
     backup: yes
@@ -43,7 +43,7 @@
 - name: copy key file to mount directory
   become: yes
   copy:
-    dest: /certs/domain.key
+    dest: /etc/ssl/certs/domain.key
     mode: 0400
     src: ssl/docker-registry.key
     backup: yes
@@ -62,14 +62,20 @@
   tags:
     - docker-registry
 
+- name: Docker-PY
+  become: yes
+  shell: pip uninstall docker-py
+  shell: pip install six==1.4
+  shell: pip install docker-py==1.1.0
+
 - name: run registry as docker container
   become: yes
   docker:
     detach: yes
     docker_api_version: '1.20'
     env:
-      REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
-      REGISTRY_HTTP_TLS_KEY: /certs/domain.key
+      REGISTRY_HTTP_TLS_CERTIFICATE: /etc/ssl/certs/domain.crt
+      REGISTRY_HTTP_TLS_KEY: /etc/ssl/certs/domain.key
     image: "{{ docker_registry_image }}:{{ docker_registry_image_tag }}"
     name: "{{ docker_registry_container_name }}"
     expose:
@@ -80,7 +86,7 @@
     restart_policy: always
     state: started
     volumes:
-      - /certs:/certs:ro
+      - /etc/ssl/certs:/etc/ssl/certs:ro
       - /home/docker-registry:/var/lib/registry
       - /docker-registry-config.yml:/etc/docker/registry/config.yml:ro
   tags:

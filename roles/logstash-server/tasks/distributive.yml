@@ -23,14 +23,14 @@
     - distributive
     - logstash-server
 
-- name: register distributive tests with consul
-  become: yes
-  copy:
-    src: distributive-logstash-check.json
-    dest: /etc/consul/
-  notify:
-    - reload consul
-  tags:
-    - consul
-    - distributive
-    - logstash-server
+# - name: register distributive tests with consul
+#   become: yes
+#   copy:
+#     src: distributive-logstash-check.json
+#     dest: /etc/consul/
+#   notify:
+#     - reload consul
+#   tags:
+#     - consul
+#     - distributive
+#     - logstash-server

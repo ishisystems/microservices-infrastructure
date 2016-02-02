@@ -2,7 +2,7 @@
 - name: install consul
   become: yes
   yum:
-    name: consul-0.5.2-4.el7.centos
+    name: https://dl.bintray.com/ciscocloud/rpm/consul-0.5.2-4.el7.centos.x86_64.rpm
     state: present
     disable_gpg_check: yes
   tags:
@@ -12,7 +12,7 @@
 - name: install consul-ui
   become: yes
   yum:
-    name: consul-ui
+    name: https://dl.bintray.com/ciscocloud/rpm/consul-ui-0.5.2-4.el7.centos.x86_64.rpm
     state: present
     disable_gpg_check: yes
   when: consul_is_server
@@ -20,10 +20,10 @@
     - consul
     - bootstrap
 
-- name: install consul-utils
+- name: consul-utls
   become: yes
   yum:
-    name: consul-utils
+    name: https://dl.bintray.com/ciscocloud/rpm/consul-utils-0.1.0-1.el7.centos.x86_64.rpm
     state: present
     disable_gpg_check: yes
   tags:

@@ -1,11 +1,11 @@
 ---
-#- name: add mesosphere repository
-#  become: yes
-#  yum:
-#    name:  http://repos.mesosphere.io/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm
-#    state: present
-#  tags:
-#    - chronos
+- name: add mesosphere repository
+  become: yes
+  yum:
+    name:  http://repos.mesosphere.io/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm
+    state: present
+  tags:
+    - chronos
 
 - name: install chronos package
   become: yes

@@ -26,6 +26,12 @@
   tags:
     - vault
 
+- name: add vault user
+  become: yes
+  user:
+    name: vault
+    comment: "vault"
+
 - name: configure vault
   become: yes
   template:
@@ -36,6 +42,7 @@
 
 - name: enable vault
   become: yes
+  become_user: vault
   service:
     name: vault
     enabled: yes

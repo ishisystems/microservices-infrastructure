@@ -48,12 +48,12 @@
   tags:
     - elastic-search
 
-# - name: ensure docker-elasticsearch docker image is present
-#   become: yes
-#   command: docker pull {{ docker_registry_fqdn }}:{{ docker_registry_port }}/{{ docker_elasticsearch_image }}:{{ docker_elasticsearch_image_tag }}
-# #  notify: restart elastic-search container
-#   tags:
-#     - elastic-search
+- name: ensure docker-elasticsearch docker image is present
+  become: yes
+  command: docker pull elasticsearch
+#  notify: restart elastic-search container
+  tags:
+    - elastic-search
 
 - name: ensure docker-elasticsearch docker image is present
   become: yes
@@ -62,8 +62,15 @@
   tags:
     - elastic-search
 
+- name: add user elasticsearch
+  become: yes
+  user: 
+   name: elasticsearch
+   comment: "elasticsearch"
+
 - name: run the container
   become: yes
+  become_user: elasticsearch
   docker:
     detach: yes
     docker_api_version: '1.20'

@@ -17,6 +17,12 @@
     - mesos
     - bootstrap
 
+- name: add mesos user
+  become: yes
+  user:
+    name: mesos
+    comment: "mesos"
+
 - name: install cyrus-sasl-md5
   become: yes
   yum:
@@ -52,15 +58,15 @@
   tags:
     - mesos
 
-# - name: configure mesos-master unit file
-#   become: yes
-#   replace:
-#     dest: /usr/lib/systemd/system/mesos-master.service
-#     regexp: "=network.target"
-#     replace: '=zookeeper.service'
-#   when: mesos_mode == "leader"
-#   tags:
-#     - mesos
+- name: configure mesos-master unit file
+  become: yes
+  replace:
+    dest: /usr/lib/systemd/system/mesos-master.service
+    regexp: "=network.target"
+    replace: '=zookeeper.service'
+  when: mesos_mode == "leader"
+  tags:
+    - mesos
 
 - name: disable mesos follower
   become: yes

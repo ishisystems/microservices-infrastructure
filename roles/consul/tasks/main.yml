@@ -1,4 +1,9 @@
 ---
+
+- name: make consul user
+  become: yes
+  user: name=consul comment="consul"
+
 - name: install consul
   become: yes
   yum:

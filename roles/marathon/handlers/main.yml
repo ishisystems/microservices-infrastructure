@@ -1,11 +1,13 @@
 ---
 - name: reload marathon
+  become_user: marathon
   become: yes
   command: systemctl daemon-reload
   notify:
     - wait for marathon to listen
 
 - name: restart marathon
+  become_user: marathon
   become: yes
   command: systemctl restart marathon
   notify:
@@ -15,14 +17,17 @@
   command: /usr/local/bin/marathon-wait-for-listen.sh
 
 - name: reload consul
+  become_user: marathon
   become: yes
   command: "{{ consul_bin }} reload"
 
 - name: restart nginx-marathon
+  become_user: marathon
   become: yes
   command: systemctl restart nginx-marathon
 
 - name: reload nginx-marathon
+  become_user: marathon
   become: yes
   command: systemctl daemon-reload
 

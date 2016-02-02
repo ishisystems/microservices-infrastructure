@@ -1,4 +1,9 @@
 ---
+
+- name: Make marathon user
+  become: yes
+  user: name=marathon comment="marathon"
+
 - name: add mesosphere repository
   become: yes
   yum:
@@ -38,7 +43,7 @@
     - reload marathon
     - restart marathon
   tags:
-    - marathon
+    - marathon    
 
 - name: configure marathon to wait for zookeeper before starting
   become: yes

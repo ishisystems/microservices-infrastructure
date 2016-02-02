@@ -1,4 +1,10 @@
 ---
+
+- name: make zookeeper user
+  become: yes
+  user: name=zookeeper comment="zookeeper"
+
+
 - name: install netcat
   become: yes
   yum:

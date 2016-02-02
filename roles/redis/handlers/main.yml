@@ -3,8 +3,10 @@
 
 - name: restart redis container
   command: docker restart {{ redis_container_name }}
+  become_user: redis
   become: yes
 
 - name: reload consul
+  become_user: redis
   become: yes
   command: "{{ consul_bin }} reload"

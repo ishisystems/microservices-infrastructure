@@ -1,10 +1,12 @@
 ---
 - name: restart consul
+  become_user: consul
   become: yes
   command: /usr/local/bin/consul-rolling-restart.sh
   notify:
     - wait for consul to listen
 
 - name: restart nginx-consul
+  become_user: consul
   become: yes
   command: systemctl restart nginx-consul

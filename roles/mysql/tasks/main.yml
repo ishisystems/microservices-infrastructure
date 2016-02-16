@@ -1,0 +1,11 @@
+---
+- name: generate mysql consul services
+  become: yes
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - src: mysql.json.j2
+      dest: /etc/consul/mysql.json
+  tags:
+    - mysql

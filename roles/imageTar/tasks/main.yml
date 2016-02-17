@@ -1,0 +1,16 @@
+---
+
+- name: save the image to the tar file
+  become: yes
+  command: "/usr/bin/docker save -o /home/sumit.suthar/{{ item }}.tar {{ item }}"
+  with_items: "{{images}}"  
+
+# - name: copy docker image tar file to remote machine
+#   become: yes
+#   synchronize: mode=pull src=pe-dev1.ishisystems.com:/home/images/{{ item }}.tar dest=pe-dev2.ishisystems.com:/home/images/{{ item }}.tar
+#   delegate_to: pe-dev1.ishisystems.com
+#   with_items: "{{images}}"
+
+- name: copy docker tar file
+  command: scp /home/sumit.suthar/{{ item }}.tar {{ username }}@{{ destination }}:/home/sumit.suthar/{{ item }}.tar
+  with_items: "{{images}}"  

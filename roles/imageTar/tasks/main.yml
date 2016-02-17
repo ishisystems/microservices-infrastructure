@@ -2,7 +2,7 @@
 
 - name: save the image to the tar file
   become: yes
-  command: "/usr/bin/docker save -o /home/sumit.suthar/{{ item }}.tar {{ item }}"
+  command: "/usr/bin/docker save -o /tmp/{{ item | basename }}.tar {{ item }}"
   with_items: "{{images}}"  
 
 # - name: copy docker image tar file to remote machine
@@ -12,5 +12,11 @@
 #   with_items: "{{images}}"
 
 - name: copy docker tar file
-  command: scp /home/sumit.suthar/{{ item }}.tar {{ username }}@{{ destination }}:/home/sumit.suthar/{{ item }}.tar
+  command: scp -P {{ ssh_port }} /tmp/{{ item | basename }}.tar {{ username }}@{{ destination }}:/tmp/{{ item | basename }}.tar
   with_items: "{{images}}"  
+
+- name: delete docker tar file
+  become: yes
+  file: path=/tmp/{{ item | basename }}.tar state=absent
+  with_items: "{{images}}"
+

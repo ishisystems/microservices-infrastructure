@@ -2,7 +2,11 @@
 
 - name: load the image into docker
   become: yes
-  command: /usr/bin/docker load -i /home/sumit.suthar/{{ item }}.tar
+  command: /usr/bin/docker load -i /tmp/{{ item | basename }}.tar
+  with_items: "{{images}}"
+
+- name: delete docker tar file
+  file: path=/tmp/{{ item | basename }}.tar state=absent
   with_items: "{{images}}"
 
 - name: tag docker image so it points to the remote registry

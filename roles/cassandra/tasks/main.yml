@@ -1,0 +1,11 @@
+---
+- name: generate cassandra consul services
+  become: yes
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - src: cassandra.json.j2
+      dest: /etc/consul/cassandra.json
+  tags:
+    - cassandra

@@ -11,10 +11,10 @@
 
 - name: tag docker image so it points to the remote registry
   become: yes
-  command: /usr/bin/docker tag {{ item }} {{ destination }}:{{ port }}/{{ item }}
+  command: /usr/bin/docker tag {{ item }} {{ destination }}:{{ port }}/{{ item | basename }}
   with_items: "{{images}}"
 
 - name: push docker images to the remote registry
   become: yes
-  command: /usr/bin/docker push {{ destination }}:{{ port }}/{{ item }}
+  command: /usr/bin/docker push {{ destination }}:{{ port }}/{{ item | basename }}
   with_items: "{{images}}" 

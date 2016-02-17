@@ -1,0 +1,8 @@
+---
+# vars file for ansible-redis
+images: ['mesos-consul:v0.2.1']
+username: sumit.suthar
+destination: 10.40.20.171
+port: 5000
+
+# 'nginx-consul:1.2', 'zookeeper:0.3', 

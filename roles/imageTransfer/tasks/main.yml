@@ -1,0 +1,16 @@
+---
+
+- name: load the image into docker
+  become: yes
+  command: /usr/bin/docker load -i /home/sumit.suthar/{{ item }}.tar
+  with_items: "{{images}}"
+
+- name: tag docker image so it points to the remote registry
+  become: yes
+  command: /usr/bin/docker tag {{ item }} {{ destination }}:{{ port }}/{{ item }}
+  with_items: "{{images}}"
+
+- name: push docker images to the remote registry
+  become: yes
+  command: /usr/bin/docker push {{ destination }}:{{ port }}/{{ item }}
+  with_items: "{{images}}" 

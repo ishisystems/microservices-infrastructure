@@ -1,4 +1,6 @@
 ---
-images: ['mesos-consul:v0.2.1']
+images: ['docker.io/seznam/percona-initialized-minimal:latest']
 username: sumit.suthar
 destination: 10.40.20.171
+
+#ssh_port: 22

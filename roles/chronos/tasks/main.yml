@@ -107,7 +107,7 @@
 
 - meta: flush_handlers
 
-- include: nginx-proxy.yml
+#- include: nginx-proxy.yml
 
 - name: deploy iptables configuration
   become: yes

@@ -11,6 +11,14 @@
     - collectd
     - bootstrap
 
+- name: add vault 
+  become: yes
+  group: name=collectd state=present
+
+- name: add vault user
+  become: yes
+  user: name=collectd group=collectd state=present
+
 - name: create collectd plugin directory
   become: yes
   file:
@@ -63,11 +71,28 @@
 #  tags:
 #    - collectd
 
+# - name: enable collectd
+#   become: yes
+#   service:
+#     name: collectd
+#     enabled: yes
+#     state: started
+#   tags:
+#     - collectd
+- name: copy the shell script
+  become: yes
+  copy:
+    src: entry.sh
+    dest: /usr/share/collectd/entry.sh
+
+- name: permissions for collectd user
+  become: yes
+  shell: "chown -R collectd:collectd /usr/share/collectd"
+
 - name: enable collectd
   become: yes
-  service:
-    name: collectd
-    enabled: yes
-    state: started
-  tags:
-    - collectd
+  shell: "chmod -R 700 /usr/share/collectd"
+
+- name: collectd start
+  become: yes
+  shell: 'su -l collectd -c "/usr/share/collectd/entry.sh"'

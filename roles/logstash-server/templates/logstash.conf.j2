@@ -1,12 +1,10 @@
 input {
     redis {
-        host => "redis.service.consul"
+        host => "10.40.20.169"
         type => "redis-input"
         # these settings should match the output of the agent
         data_type => "list"
         key => "logstash"
-        # We use json_event here since the sender is a logstash agent
-        message_format => "json_event"
       }
 }
 
@@ -19,7 +17,10 @@ filter {
 }
 
 output {
-elasticsearch { hosts => ["elasticsearch.service.consul:9200"] }
+elasticsearch { 
+  host => ["10.40.20.169:9200"]
+  protocol => http
+  }
   stdout {
     codec => rubydebug
   }

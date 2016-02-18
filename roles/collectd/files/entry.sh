@@ -1,0 +1,1 @@
+nohup /usr/sbin/collectd -C /etc/collectd.conf -f &

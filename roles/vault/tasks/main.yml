@@ -1,6 +1,7 @@
 ---
 - name: install vault
   become: yes
+  become_user: vault
   yum:
     name: "https://bintray.com/artifact/download/stevendborrelli/rpm/vault-0.1.0-1.el7.centos.x86_64.rpm"
     state: present
@@ -8,8 +9,17 @@
     - vault
     - bootstrap
 
+# - name: add vault 
+#   become: yes
+#   group: name=vault state=present
+
+# - name: add vault user
+#   become: yes
+#   user: name=vault group=vault state=present
+
 - name: configure vault service
   become: yes
+  # become_user: vault
   copy:
     src: vault.service
     dest: /usr/lib/systemd/system/vault.service
@@ -20,25 +30,33 @@
 
 - name: create vault directories
   become: yes
+  # become_user: vault
   file:
     path: /etc/vault
     state: directory
   tags:
     - vault
 
-- name: add vault user
-  become: yes
-  user:
-    name: vault
-    comment: "vault"
-
 - name: configure vault
   become: yes
+  # become_user: vault
   template:
     src: vault.config.j2
     dest: /etc/vault/vault.config
   tags:
     - vault
+
+# - become: yes
+#   shell: "chown vault:vault /usr/lib/systemd/system/vault.service"
+
+# - become: yes
+#   shell: "chown -R vault:vault /etc/consul"
+
+# - become: yes
+#   shell: "chown vault:vault /usr/bin/vault"
+
+# - become: yes
+#   shell: "chown -R vault:vault /etc/vault"
 
 - name: enable vault
   become: yes

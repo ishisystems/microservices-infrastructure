@@ -1,1 +1,2 @@
 do_private_docker_registry: false
+docker_registry_fqdn: pe-dev3.ishisystems.com

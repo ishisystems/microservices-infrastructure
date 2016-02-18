@@ -34,14 +34,14 @@ input {
 filter {
   if [type] == "syslog" {
     mutate {
-      replace => { "host" => "{{ inventory_hostname }}" }
+      replace => { "hosts" => "{{ inventory_hostname }}" }
     }
   }
 }
 
 output {
 redis {
-        host => "redis.service.consul"
+        host => "10.40.20.169"
         # these settings should match the output of the agent
         data_type => "list"
         key => "logstash"

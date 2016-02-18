@@ -1,4 +1,4 @@
-FROM cirrus-node3.dev.yaanatech.net:5000/centos-7.2-nonet-plus-20151217
+FROM pe-dev3.ishisystems.com:5000/centos-7.2-nonet-plus-20151217
 
 RUN yum install -y java-1.8.0-openjdk-headless tar
 
@@ -28,8 +28,8 @@ RUN yum install -y \
     chmod 700 ${LS_CFG_SSL_DIR}
 
 # Configure environment
-COPY docker/logstash/docker-entrypoint.sh /
-COPY docker/logstash/config /etc/logstash/conf.d
+COPY /docker-entrypoint.sh /
+COPY /config /etc/logstash/conf.d
 
 # Listen for defaults: 5000/tcp:udp (syslog), 5002/tcp (logstash-forwarder), 5004/tcp (journald), 5006/udp (Logspout), 5200/tcp (log4j)
 EXPOSE 5000 5002 5004 5006 5200

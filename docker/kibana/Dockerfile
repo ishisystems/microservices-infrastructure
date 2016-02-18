@@ -1,4 +1,4 @@
-FROM cirrus-node3.dev.yaanatech.net:5000/centos7.1-nonet-20151201
+FROM centos:7
 
 # add our user and group first to make sure their IDs get assigned consistently
 RUN groupadd -r kibana && useradd -r -m -g kibana kibana

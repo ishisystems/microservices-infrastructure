@@ -4,7 +4,7 @@
   become: yes
   yum:
     name: device-mapper-libs
-    state: latest
+    state: present
   tags:
     - docker
     - bootstrap
@@ -71,7 +71,7 @@
   lineinfile:
     dest: /etc/sysconfig/docker-storage
     regexp: ^DOCKER_STORAGE_OPTIONS=
-    line: DOCKER_STORAGE_OPTIONS=--storage-driver devicemapper --storage-opt dm.fs=xfs --storage-opt dm.thinpooldev=/dev/mapper/pri-docker--pool --storage-opt dm.use_deferred_removal=true
+    line: DOCKER_STORAGE_OPTIONS=--storage-driver devicemapper --storage-opt dm.fs=xfs --storage-opt dm.thinpooldev=/dev/mapper/centos-docker--pool --storage-opt dm.use_deferred_removal=true
     state: present
     create: yes
   notify:
@@ -84,13 +84,13 @@
   lineinfile:
     dest: /usr/lib/systemd/system/docker.service
     regexp: ^ExecStart=/usr/bin/docker 
-    line: ExecStart=/usr/bin/docker daemon -H /root/
+    line: ExecStart=/usr/bin/docker daemon $OPTIONS $other_arg \\
     state: present
     create: yes
   notify:
     - reload docker
   tags:
-     - docker
+    - docker
 
 - name: create docker.system.d
   become: yes

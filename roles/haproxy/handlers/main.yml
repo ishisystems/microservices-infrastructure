@@ -9,3 +9,7 @@
 - name: restart haproxy 
   become: yes
   command: systemctl restart haproxy
+
+- name: reload consul
+  become: yes
+  command: /usr/bin reload

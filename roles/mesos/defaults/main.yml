@@ -8,7 +8,7 @@ mesos_work_dir: /var/run/mesos
 mesos_leader_port: 15050
 mesos_leader_proxy_port: 5050
 mesos_follower_port: 5051
-mesos_leader_cmd: mesos-master
+mesos_leader_cmd: mesos-masters
 mesos_follower_cmd: mesos-slave
 mesos_executor_registration_timeout: 10mins
 mesos_resources: "ports(*):[4000-5000, 7000-8000, 9000-10000, 25000-26000, 31000-32000]"
@@ -16,6 +16,7 @@ mesos_cluster: cluster1
 
 mesos_zk_auth: "{% if zk_mesos_user_secret is defined %}{{ zk_mesos_user }}:{{ zk_mesos_user_secret }}@{% endif %}"
 mesos_zk_dns: "zookeeper.service.{{ consul_dns_domain }}"
+# mesos_zk_dns: "10.40.20.167"
 mesos_zk_port: 2181
 mesos_zk_chroot: mesos
 zk_docker_image: "ciscocloud/zookeeper:0.3"

@@ -3,20 +3,26 @@ pe-dev1.ishisystems.com private_ipv4=10.40.20.167
 pe-dev2.ishisystems.com private_ipv4=10.40.20.168
 pe-dev3.ishisystems.com private_ipv4=10.40.20.169
 pe-dev4.ishisystems.com private_ipv4=10.40.20.170
+pe-dev5.ishisystems.com private_ipv4=10.40.20.171
+pe-dev6.ishisystems.com private_ipv4=10.40.20.172
 
 [dc=teldata]
 pe-dev1.ishisystems.com 
 pe-dev2.ishisystems.com 
 pe-dev3.ishisystems.com
 pe-dev4.ishisystems.com
+pe-dev5.ishisystems.com
+pe-dev6.ishisystems.com
 
 [role=control]
-pe-dev2.ishisystems.com
 pe-dev4.ishisystems.com
+pe-dev5.ishisystems.com 
+pe-dev6.ishisystems.com  
 
 [role=worker]
-pe-dev1.ishisystems.com 
-pe-dev3.ishisystems.com 
+pe-dev3.ishisystems.com consul_is_server=False
+pe-dev2.ishisystems.com consul_is_server=False
+pe-dev1.ishisystems.com consul_is_server=False
 
 [role=elasticsearch]
 pe-dev3.ishisystems.com

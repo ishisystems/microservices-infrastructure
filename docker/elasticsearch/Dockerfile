@@ -1,4 +1,4 @@
-FROM cirrus-node3.dev.yaanatech.net:5000/centos-7.2-nonet-plus-20151217
+FROM pe-dev3.ishisystems.com:5000/centos-7.2-nonet-plus-20151217
 
 RUN yum install -y java-1.8.0-openjdk-headless tar
 
@@ -19,7 +19,7 @@ RUN curl -fL https://download.elastic.co/elasticsearch/elasticsearch/elasticsear
 
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/elasticsearch/bin:/opt/elasticsearch/data:/opt/elasticsearch/config
 
-COPY docker/elasticsearch/docker-entrypoint.sh /docker-entrypoint.sh
+COPY /docker-entrypoint.sh /docker-entrypoint.sh
 
 RUN chmod 0500 /docker-entrypoint.sh
 

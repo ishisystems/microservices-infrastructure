@@ -109,7 +109,7 @@
 - name: install distributive
   become: yes
   yum:
-    name: "https://dl.bintray.com/ciscocloud/rpm/distributive-0.2.1-5.el7.centos.x86_64.rpm"
+    name: "https://bintray.com/artifact/download/ciscocloud/rpm/distributive-0.2.1-5.el7.centos.x86_64.rpm"
     state: present
   tags:
     - distributive

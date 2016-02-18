@@ -2,7 +2,6 @@
 # handlers file for elastic-search
 
 - name: restart elastic-search container
-  become_user: elasticsearch
   command: docker restart {{ elastic_search_container_name }}
   become: yes
 

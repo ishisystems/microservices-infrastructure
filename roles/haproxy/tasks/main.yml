@@ -16,6 +16,24 @@
   tags:
     - haproxy
 
+# - name: creat haproxy directory
+#   become: yes
+#   shell: "mkdir /etc/haproxy"
+
+- name: copy entry script
+  become: yes
+  copy:
+    src: entry.sh
+    dest: /etc/haproxy/entry.sh
+
+
+- name: copy initiation script
+  become: yes
+  copy:
+    src: script.sh
+    dest: /etc/haproxy/script.sh
+
+
 - name: configure haproxy
   become: yes
   template:

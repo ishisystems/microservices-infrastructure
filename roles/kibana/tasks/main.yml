@@ -1,21 +1,14 @@
 ---
 # tasks file for kibana
 
-- name: add user
-  become: yes
-  user:
-    name: kibana
-    comment: "kibana"
-
 - name: run the container
   become: yes
-  become_user: kibana
   docker:
     detach: yes
     docker_api_version: '1.20'
     env:
-      ELASTICSEARCH_URL: "{{ elasticsearch_url }}"
-    image: kibana
+      ELASTICSEARCH_URL: "http://pe-dev3.ishisystems.com:9200"
+    image: pe-dev3.ishisystems.com:5000/kibana:0.1
     name: kibana
     ports:
       - 5601:5601

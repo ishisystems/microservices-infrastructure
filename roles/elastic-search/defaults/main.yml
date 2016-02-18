@@ -11,3 +11,5 @@ index:
   number_of_replicas: 1
 network:
   host: 0.0.0.0
+
+consul_bin: /bin/consul

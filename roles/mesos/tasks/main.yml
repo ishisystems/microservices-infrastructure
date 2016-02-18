@@ -1,12 +1,10 @@
 ---
-- name: add mesosphere repository
-  become: yes
-  yum:
-    name:  http://repos.mesosphere.io/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm
-    state: present
-  tags:
-    - mesos
-    - bootstrap
+# - name: add mesosphere repository
+#   become: yes
+#   shell: "rpm -Uvh http://repos.mesosphere.com/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm"
+#   tags:
+#     - mesos
+#     - bootstrap
 
 - name: install mesos package
   become: yes
@@ -16,12 +14,6 @@
   tags:
     - mesos
     - bootstrap
-
-- name: add mesos user
-  become: yes
-  user:
-    name: mesos
-    comment: "mesos"
 
 - name: install cyrus-sasl-md5
   become: yes
@@ -85,8 +77,8 @@
   tags:
     - mesos
 
-# - include: leader.yml
-#   when: mesos_mode == "leader" or mesos_mode == "mixed"
+- include: leader.yml
+  when: mesos_mode == "leader" or mesos_mode == "mixed"
 
-# - include: follower.yml
-#   when: mesos_mode == "follower" or mesos_mode == "mixed"
+- include: follower.yml
+  when: mesos_mode == "follower" or mesos_mode == "mixed"

@@ -39,6 +39,7 @@ security_enabled: true
 zk_chronos_user: chronos
 zk_chronos_user_secret: QbQhKFcLneqTigpj
 zk_chronos_user_secret_digest: v4Tkk1zM9/jvoYfjwB3qjhCyb8U=
+vault_root_token: de7a12b3-7d42-65f9-59ff-3fd404dc6d9a
 zk_marathon_user: marathon
 zk_marathon_user_secret: y6j71UQL84AtK3lg
 zk_marathon_user_secret_digest: KcRxNF2FOcepKVUzGQBdjBKxvNc=

@@ -20,7 +20,7 @@
 - name: copy registry cert file
   become: yes
   copy:
-    dest: /etc/pki/ca-trust/source/anchors/cirrus-node3.crt
+    dest: /etc/pki/ca-trust/source/anchors/pe-dev3.ishisystems.com.crt
     src: ssl/docker-registry.crt
   notify: update-ca-trust
   tags:

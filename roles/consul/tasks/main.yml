@@ -1,13 +1,8 @@
 ---
-
-- name: make consul user
-  become: yes
-  user: name=consul comment="consul"
-
 - name: install consul
   become: yes
   yum:
-    name: https://dl.bintray.com/ciscocloud/rpm/consul-0.5.2-4.el7.centos.x86_64.rpm
+    name: https://bintray.com/artifact/download/ciscocloud/rpm/consul-0.5.2-4.el7.centos.x86_64.rpm
     state: present
     disable_gpg_check: yes
   tags:
@@ -17,7 +12,7 @@
 - name: install consul-ui
   become: yes
   yum:
-    name: https://dl.bintray.com/ciscocloud/rpm/consul-ui-0.5.2-4.el7.centos.x86_64.rpm
+    name: https://bintray.com/artifact/download/ciscocloud/rpm/consul-ui-0.5.2-4.el7.centos.x86_64.rpm
     state: present
     disable_gpg_check: yes
   when: consul_is_server
@@ -25,10 +20,10 @@
     - consul
     - bootstrap
 
-- name: consul-utls
+- name: install consul-utils
   become: yes
   yum:
-    name: https://dl.bintray.com/ciscocloud/rpm/consul-utils-0.1.0-1.el7.centos.x86_64.rpm
+    name: https://bintray.com/artifact/download/ciscocloud/rpm/consul-utils-0.1.0-1.el7.centos.x86_64.rpm
     state: present
     disable_gpg_check: yes
   tags:
@@ -127,7 +122,7 @@
 
 - meta: flush_handlers
 
-- include: acl.yml
+# - include: acl.yml
 
 - meta: flush_handlers
 

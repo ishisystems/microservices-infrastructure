@@ -13,60 +13,60 @@
 
 # openssl req -newkey rsa:4096 -nodes -sha256 -keyout /certs/domain.key -x509 -days 365 -out /certs/domain.crt
 
-- name: create folder for docker registry data
-  become: yes
-  file:
-    name: /home/docker-registry
-    state: directory
-    mode: 0755
-  tags:
-    - docker-registry
+# - name: create folder for docker registry data
+#   become: yes
+#   file:
+#     name: /home/docker-registry
+#     state: directory
+#     mode: 0755
+#   tags:
+#     - docker-registry
 
-- name: ensure docker-registry docker image is present
-  become: yes
-  command: docker pull {{ docker_registry_image }}:{{ docker_registry_image_tag }}
-  notify: restart docker-registry container
-  tags:
-    - docker-registry
+# - name: ensure docker-registry docker image is present
+#   become: yes
+#   command: docker pull {{ docker_registry_image }}:{{ docker_registry_image_tag }}
+#   notify: restart docker-registry container
+#   tags:
+#     - docker-registry
 
-- name: copy cert file to mount directory
-  become: yes
-  copy:
-    dest: /etc/ssl/certs/domain.crt
-    mode: 0400
-    src: ssl/docker-registry.crt
-    backup: yes
-  notify: restart docker-registry container
-  tags:
-    - docker-registry
+# - name: copy cert file to mount directory
+#   become: yes
+#   copy:
+#     dest: /etc/ssl/certs/domain.crt
+#     mode: 0400
+#     src: ssl/docker-registry.crt
+#     backup: yes
+#   notify: restart docker-registry container
+#   tags:
+#     - docker-registry
 
-- name: copy key file to mount directory
-  become: yes
-  copy:
-    dest: /etc/ssl/certs/domain.key
-    mode: 0400
-    src: ssl/docker-registry.key
-    backup: yes
-  notify: restart docker-registry container
-  tags:
-    - docker-registry
+# - name: copy key file to mount directory
+#   become: yes
+#   copy:
+#     dest: /etc/ssl/certs/domain.key
+#     mode: 0400
+#     src: ssl/docker-registry.key
+#     backup: yes
+#   notify: restart docker-registry container
+#   tags:
+#     - docker-registry
 
-- name: copy config file
-  become: yes
-  copy:
-    dest: /docker-registry-config.yml
-    mode: 0400
-    src: config.yml
-    backup: yes
-  notify: restart docker-registry container
-  tags:
-    - docker-registry
+# - name: copy config file
+#   become: yes
+#   copy:
+#     dest: /docker-registry-config.yml
+#     mode: 0400
+#     src: config.yml
+#     backup: yes
+#   notify: restart docker-registry container
+#   tags:
+#     - docker-registry
 
-- name: Docker-PY
-  become: yes
-  shell: pip uninstall docker-py
-  shell: pip install six==1.4
-  shell: pip install docker-py==1.1.0
+# - name: Docker-PY
+#   become: yes
+#   shell: pip uninstall docker-py
+#   shell: pip install six==1.4
+#   shell: pip install docker-py==1.1.0
 
 - name: run registry as docker container
   become: yes

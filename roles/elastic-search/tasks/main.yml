@@ -1,9 +1,4 @@
 ---
-# tasks file for elastic-search
-- name: Make elasticsearch user
-  become: yes
-  user: name=elasticsearch comment="elastic search"
-
 - name: create folder for elastic search data
   become: yes
   file:
@@ -48,37 +43,23 @@
   tags:
     - elastic-search
 
-- name: ensure docker-elasticsearch docker image is present
-  become: yes
-  command: docker pull elasticsearch
-#  notify: restart elastic-search container
-  tags:
-    - elastic-search
-
-- name: ensure docker-elasticsearch docker image is present
-  become: yes
-  command: docker pull elasticsearch
-#  notify: restart elastic-search container
-  tags:
-    - elastic-search
-
-- name: add user elasticsearch
-  become: yes
-  user: 
-   name: elasticsearch
-   comment: "elasticsearch"
+# - name: ensure docker-elasticsearch docker image is present
+#   become: yes
+#   command: "docker pull pe-dev3.ishisystems.com:5000/{{ docker_elasticsearch_image }}:{{ docker_elasticsearch_image_tag }}"
+# #  notify: restart elastic-search container
+#   tags:
+#     - elastic-search
 
 - name: run the container
   become: yes
-  become_user: elasticsearch
   docker:
     detach: yes
     docker_api_version: '1.20'
     #env:
     #  REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
     #  REGISTRY_HTTP_TLS_KEY: /certs/domain.key
-    image: elasticsearch
-    name: elasticsearch
+    image: "pe-dev3.ishisystems.com:5000/{{ docker_elasticsearch_image }}:{{ docker_elasticsearch_image_tag }}"
+    name: "{{ elastic_search_container_name }}"
     ports:
       - 9200:9200
       - 9300:9300
@@ -89,6 +70,16 @@
       - /home/elasticsearch/data:/opt/elasticsearch/data
       - /usr/share/distributive:/usr/share/distributive
       - /etc/distributive.d:/etc/distributive.d
+  tags:
+    - elastic-search
+
+- name: generate elasticsearch consul services
+  become: yes
+  template:
+    src: elasticsearch.json.j2
+    dest: /etc/consul/elasticsearch.json
+  notify:
+    - reload consul
   tags:
     - elastic-search
 

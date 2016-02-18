@@ -1,9 +1,4 @@
 ---
-# tasks file for redis
-- name: Make redis user
-  become: yes
-  user: name=redis comment="redis"
-
 - name: create folder for redis data
   become: yes
   file:
@@ -29,19 +24,19 @@
     - redis
     - consul
 
-- name: ensure docker-redis docker image is present
-  become: yes
-  command: docker pull redis
-#  notify: restart elastic-search container
-  tags:
-    - redis
+# - name: ensure docker-redis docker image is present
+#   become: yes
+#   command: docker pull pe-dev3.ishisystems.com:5000/{{ docker_redis_image }}:{{ docker_redis_image_tag }}
+# #  notify: restart elastic-search container
+#   tags:
+#     - redis
 
 - name: run the container
   become: yes
   docker:
     detach: yes
     docker_api_version: '1.20'
-    image: redis
+    image: pe-dev3.ishisystems.com:5000/{{ docker_redis_image }}:{{ docker_redis_image_tag }}
     name: redis
     ports:
       - 6379:6379
@@ -51,6 +46,16 @@
       - /home/redis/data:/data
       - /usr/share/distributive:/usr/share/distributive
       - /etc/distributive.d:/etc/distributive.d
+  tags:
+    - redis
+
+- name: generate redis consul services
+  become: yes
+  template:
+    src: redis.json.j2
+    dest: /etc/consul/redis.json
+  notify:
+    - reload consul
   tags:
     - redis
 

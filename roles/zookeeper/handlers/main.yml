@@ -1,13 +1,11 @@
 ---
 - name: reload systemd daemon
-  become_user: zookeeper
   become: yes
   command: systemctl daemon-reload
   tags: 
     - zookeeper 
 
 - name: register zookeeper service
-  become_user: zookeeper
   become: yes
   service:  
     enabled: yes 
@@ -17,7 +15,6 @@
     - zookeeper  
 
 - name: restart zookeeper
-  become_user: zookeeper
   become: yes
   service:
     name: "{{ zookeeper_service }}"

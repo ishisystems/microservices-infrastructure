@@ -1,0 +1,50 @@
+GIT
+  remote: https://github.com/mhamrah/ansible-consul
+  ref: master
+  sha: 38397d7103f659e9f3944da816d6b8a3b0e26018
+  specs:
+    ansible-consul (0.0.0)
+
+GIT
+  remote: https://github.com/mhamrah/ansible-docker
+  ref: master
+  sha: 9526aed69cc75e01bbf8533a746566bd6f13eb0a
+  specs:
+    ansible-docker (0.0.0)
+
+GIT
+  remote: https://github.com/mhamrah/ansible-java8
+  ref: master
+  sha: ee480e95fcdf16550f49472044560ff7a664b95a
+  specs:
+    ansible-java8 (0.0.0)
+
+GIT
+  remote: https://github.com/mhamrah/ansible-marathon
+  ref: master
+  sha: 8665893cff8109234b3869c302fac77677afb5ed
+  specs:
+    ansible-marathon (0.0.0)
+
+GIT
+  remote: https://github.com/mhamrah/ansible-mesos
+  ref: master
+  sha: 156cf2ae5e4532a03137ff3fbbd2d6fc9c8fb002
+  specs:
+    ansible-mesos (0.0.0)
+
+GIT
+  remote: https://github.com/mhamrah/ansible-zookeeper
+  ref: master
+  sha: ba4340361486b58f13d7581e9a0ba87c11ec4b49
+  specs:
+    ansible-zookeeper (0.0.0)
+
+DEPENDENCIES
+  ansible-consul (>= 0)
+  ansible-docker (>= 0)
+  ansible-java8 (>= 0)
+  ansible-marathon (>= 0)
+  ansible-mesos (>= 0)
+  ansible-zookeeper (>= 0)
+

@@ -4,7 +4,6 @@
   pip:
     name: "{{ item }}"
     state: present
-    extra_args: '--proxy https://tel-proxy.yaanatech.net:3128'
   with_items:
     - py-dateutil
     - docker-py>=1.0.0

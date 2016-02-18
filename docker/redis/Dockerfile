@@ -1,4 +1,4 @@
-FROM cirrus-node3.dev.yaanatech.net:5000/centos-7.2-nonet-plus-20151217
+FROM centos:7
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN groupadd -r redis && useradd -r -g redis redis
@@ -34,7 +34,7 @@ RUN mkdir /data && chown redis:redis /data
 VOLUME /data
 WORKDIR /data
 
-COPY docker/redis/docker-entrypoint.sh /
+COPY /docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 6379

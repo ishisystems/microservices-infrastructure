@@ -18,13 +18,6 @@
   tags:
     - logstash-server
 
-- name: ensure logstash-server docker image is present
-  become: yes
-  command: /usr/bin/docker pull {{ logstash_image }}:{{ logstash_image_tag }}
-  tags:
-    - logstash-server
-    - bootstrap
-
 - name: generate logstash-server systemd service file
   become: yes
   template:

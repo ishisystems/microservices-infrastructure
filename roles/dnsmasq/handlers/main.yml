@@ -9,4 +9,4 @@
 
 - name: reload consul
   become: yes
-  command: "{{ consul_bin }} reload"
+  command: "/bin/consul reload"

@@ -1,6 +1,6 @@
 ---
-logstash_image: ciscocloud/logstash
-logstash_image_tag: 0.2
+logstash_image: docker pull pe-dev3.ishisystems.com:5000/logstash
+logstash_image_tag: 0.1
 
 # Stdout
 logstash_output_stdout: no

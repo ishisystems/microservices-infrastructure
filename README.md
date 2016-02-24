@@ -3,6 +3,8 @@
 
 # Microservices-Infrastructure is now MANTL.
 
+[![Join the chat at https://gitter.im/ishisystems/microservices-infrastructure](https://badges.gitter.im/ishisystems/microservices-infrastructure.svg)](https://gitter.im/ishisystems/microservices-infrastructure?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 See [http://mantl.io](http://mantl.io) for more details.
 
 Existing Developer? For information on how the rename affects you, [see our handy FAQ](./mantl-rename-faq.md) 

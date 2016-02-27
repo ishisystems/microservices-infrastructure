@@ -66,3 +66,11 @@
 - meta: flush_handlers
 
 - include: distributive.yml
+
+- name: enasure logstash-server
+  become: yes
+  service:
+    name: logstash-server
+    state: started
+  tags:
+    - logstash-server

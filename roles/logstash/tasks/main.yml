@@ -63,4 +63,11 @@
   tags:
     - logstash
 
+# - name: register logstash service with the consul agent
+#   consul:
+#     service_name: logstash
+#     service_port: 1514
+#     state: present
+
+
 - meta: flush_handlers

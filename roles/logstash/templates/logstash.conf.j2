@@ -40,10 +40,8 @@ filter {
 }
 
 output {
-redis {
-        host => "redis.service.consul"
-        # these settings should match the output of the agent
-        data_type => "list"
-        key => "logstash"
+kafka {
+        broker_list => "broker-0.service.consul:4001"
+        topic_id => "topic1"
       }
 }

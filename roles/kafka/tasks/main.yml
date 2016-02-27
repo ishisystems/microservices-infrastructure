@@ -1,0 +1,65 @@
+---
+# - name: Install git package
+#   become: yes
+#   yum:
+#     name: git
+#     state: present
+#   tags:
+#     - kafka
+
+# - name: Download kafka-mesos repo 
+#   become: yes
+#   git: 
+#     repo: "{{ kafka_mesos_repo }}" 
+#     dest: "{{ kafka_mesos_install_dir }}"
+#     force: yes
+#   tags:
+#     - kafka
+
+# - name: Build kafka-mesos project 
+#   become: yes
+#   command: "./gradlew jar"
+#   args:
+#     chdir: "{{ kafka_mesos_install_dir }}"
+#     creates: "{{ kafka_mesos_install_dir }}/.gradle"
+#   tags:
+#     - kafka
+
+# - name: Download Kafka binary
+#   become: yes
+#   get_url: 
+#     url: "{{ kafka_binary_url }}/{{ kafka_version }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tgz"
+#     dest: "{{ kafka_mesos_install_dir }}"
+#   register: kafka_downloadeds
+#   tags:
+#     - kafka 
+
+# - name: Create Kafka directory
+#   become: yes
+#   file: 
+#     path: "{{ kafka_install_dir }}"
+#     state: directory
+#   tags:
+#     - kafka
+
+# - name: Setup Kafka binary
+#   become: yes
+#   unarchive:
+#     src: "{{ kafka_mesos_install_dir }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tgz"
+#     dest: "{{ kafka_install_dir }}"
+#     copy: no
+#   tags:
+#     - kafka
+
+# - name: Start kafka scheduler
+#   run_once: true
+#   become: yes
+#   shell: nohup ./kafka-mesos.sh scheduler --user=root --master=zk://{{ zookeeper_master }}:2181/mesos --zk={{ zookeeper_master }}:2181 --api=http://{{ ansible_hostname }}:7000 --principal={{ kafka_principal }} --secret={{ kafka_secret }} &
+#   args:
+#     chdir: "{{ kafka_mesos_install_dir }}"
+#   tags:
+#     - kafka
+
+- include: client.yml
+
+- include: config.yml
